@@ -15,6 +15,7 @@ import Quotes from "./pages/Quotes";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./credentials";
 import User from "./pages/User";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 function App() {
   useEffect(() => {
@@ -50,6 +51,7 @@ function App() {
       <AppBar component="nav" sx={{ bgcolor: "#d9dbf1" }}>
         <Container sx={{ maxWidth: "1000px" }}>
           <Toolbar disableGutters>
+            <MenuBookIcon sx={{color:"#000", mr:"5px"}}/>
             <Typography
               variant="h6"
               noWrap
@@ -83,17 +85,20 @@ function App() {
               <Box>
                 <Button
                   sx={{ color: "#000" }}
-                  onClick={() => setCurPage(pages.quotes)}
+                  onClick={() => setCurPage(pages.addQuotes)}
                 >
                   Add Quotes
                 </Button>
                 <Button
                   sx={{ color: "#000" }}
-                  onClick={() => setCurPage(pages.addQuotes)}
+                  onClick={() => setCurPage(pages.quotes)}
                 >
                   Your Quotes
                 </Button>
-                <Button sx={{ color: "#000" }} onClick={logOut}>
+                <Button
+                  sx={{ color: "#000" }}
+                  onClick={() => setCurPage(pages.user)}
+                >
                   Account
                 </Button>
                 <Button sx={{ color: "#000" }} onClick={logOut}>

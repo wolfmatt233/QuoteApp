@@ -12,6 +12,6 @@ This is a React app that is focused on cataloging your favorite quotes from book
   - Sharing options: social media, copy quote, maybe screenshot option
   - Each quote connected to a book from an API, view more.
 - Book Details: Details, Image, and links for a book.
-- Account: Page to change password, authenticate email, change username, delete account.
+- Account: Page to change password, change username, delete account.
 - Sign up
 - Log in

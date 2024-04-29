@@ -5,7 +5,7 @@ import { appStyle } from "../AppSx";
 export default function AddQuotes() {
   return (
     <Container sx={appStyle}>
-      <Typography>AddQuotes</Typography>
+      <Typography>Add Quotes</Typography>
     </Container>
   );
 }
