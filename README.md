@@ -1,4 +1,4 @@
-# Quotes App
+# Quote App
 
 This is a React app that is focused on cataloging your favorite quotes from books. There will be account creation and storage using Firebase and an API will be used to fetch book details. Users can create quotes and add them to their own collection.
 
