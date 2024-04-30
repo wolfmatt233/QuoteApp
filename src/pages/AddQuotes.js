@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Box, Container, Typography } from "@mui/material";
-import { appStyle } from "../AppSx";
+import { Container } from "@mui/material";
+import { appStyle, createInput } from "../AppSx";
+import AddForm from "./components/AddForm";
 
 export default function AddQuotes() {
   return (
     <Container sx={appStyle}>
-      <Typography>Add Quotes</Typography>
+      <AddForm />
     </Container>
   );
 }
