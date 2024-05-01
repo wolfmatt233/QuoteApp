@@ -1,6 +1,8 @@
 export const appStyle = {
-  pt: "94px",
+  mt: "64px",
+  p: "40px 0",
   maxWidth: "1000px",
+  height: "calc(100vh - 64px)",
 };
 
 export const signupContainer = {

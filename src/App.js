@@ -48,17 +48,17 @@ function App() {
 
   return (
     <Box>
-      <AppBar component="nav" sx={{ bgcolor: "#d9dbf1" }}>
+      <AppBar component="nav" sx={{ bgcolor: "#284B63" }}>
         <Container sx={{ maxWidth: "1000px" }}>
           <Toolbar disableGutters>
-            <MenuBookIcon sx={{color:"#000", mr:"5px"}}/>
+            <MenuBookIcon sx={{color:"#fff", mr:"5px"}}/>
             <Typography
               variant="h6"
               noWrap
               component="div"
               sx={{
                 flexGrow: 1,
-                color: "#000",
+                color: "#fff",
                 cursor: "pointer",
                 display: { xs: "none", sm: "block" },
               }}
@@ -69,13 +69,13 @@ function App() {
             {userButtons == false ? (
               <Box>
                 <Button
-                  sx={{ color: "#000" }}
+                  sx={{ color: "#fff" }}
                   onClick={() => setCurPage(pages.login)}
                 >
                   Login
                 </Button>
                 <Button
-                  sx={{ color: "#000" }}
+                  sx={{ color: "#fff" }}
                   onClick={() => setCurPage(pages.signup)}
                 >
                   Create Account
@@ -84,24 +84,24 @@ function App() {
             ) : (
               <Box>
                 <Button
-                  sx={{ color: "#000" }}
+                  sx={{ color: "#fff" }}
                   onClick={() => setCurPage(pages.addQuotes)}
                 >
-                  Add Quotes
+                  Add a Quote
                 </Button>
                 <Button
-                  sx={{ color: "#000" }}
+                  sx={{ color: "#fff" }}
                   onClick={() => setCurPage(pages.quotes)}
                 >
                   Your Quotes
                 </Button>
                 <Button
-                  sx={{ color: "#000" }}
+                  sx={{ color: "#fff" }}
                   onClick={() => setCurPage(pages.user)}
                 >
                   Account
                 </Button>
-                <Button sx={{ color: "#000" }} onClick={logOut}>
+                <Button sx={{ color: "#fff" }} onClick={logOut}>
                   Log Out
                 </Button>
               </Box>

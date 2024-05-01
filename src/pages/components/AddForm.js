@@ -10,6 +10,7 @@ import {
   Paper,
   TextField,
   Typography,
+  createTheme,
 } from "@mui/material";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
@@ -107,7 +108,7 @@ export default function AddForm() {
 
   return (
     <Paper sx={addPaper} elevation={6}>
-      <Collapse in={alertToggle} sx={{mb: "10px"}}>
+      <Collapse in={alertToggle} sx={{ mb: "10px" }}>
         <Alert
           severity="success"
           variant="outlined"
@@ -201,7 +202,7 @@ export default function AddForm() {
           setPage(e.target.value);
         }}
       />
-      <Button variant="contained" sx={addInput} onClick={addQuote}>
+      <Button variant="contained" sx={addBtn} onClick={addQuote}>
         Add Quote
       </Button>
     </Paper>
@@ -210,6 +211,10 @@ export default function AddForm() {
 
 const addInput = {
   width: "100%",
+  mt: "15px",
+};
+
+const addBtn = {
   mt: "15px",
 };
 
