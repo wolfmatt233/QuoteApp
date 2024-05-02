@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box, Container, Typography, Paper } from "@mui/material";
 import { appStyle } from "../AppSx";
-import hero from "../images/homehero.jpg";
 
 export default function Home() {
   return (
@@ -45,11 +44,14 @@ const homeHero = {
   p: "20px",
   textAlign: "center",
   position: "relative",
+  bgcolor: "#284B63",
+  borderRadius: "10px",
+  minHeight: "93%"
 };
 
 const heroTitle = {
   mt: "20px",
-  color: "#191919",
+  color: "#fff",
 };
 
 const heroContainer = {
@@ -68,7 +70,7 @@ const heroContainer = {
 const heroInfo = {
   p: "15px",
   pr: "20px",
-  bgcolor: "#664E4C",
+  bgcolor: "#3d5470",
   height: "250px",
   display: "flex",
   width: "170px",
@@ -85,8 +87,8 @@ const bookline = {
   position: "absolute",
   left: "0%",
   width: "20px",
-  backgroundColor: "#473635",
-  borderRight: "2px solid #473635",
+  backgroundColor: "#253a54",
+  borderRight: "2px solid #1c2f46",
 };
 
 const bookpages = {

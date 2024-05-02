@@ -10,7 +10,6 @@ import {
   Paper,
   TextField,
   Typography,
-  createTheme,
 } from "@mui/material";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
@@ -53,6 +52,7 @@ export default function AddForm() {
   useEffect(() => {
     if (query == "") {
       setApiRes([]);
+      setInputLoading(false);
     } else {
       const getData = setTimeout(() => {
         fetch(`https://openlibrary.org/search.json?q=${query}`)
@@ -60,7 +60,6 @@ export default function AddForm() {
             return response.json();
           })
           .then((response) => {
-            console.log(response.docs);
             response.docs.forEach((book, idx) => {
               book.idx = idx;
             });
@@ -89,9 +88,11 @@ export default function AddForm() {
       setPageError(true);
       setPageErrorText("Enter a page number");
     } else {
+      let bookInfo = book.split("&");
+
       await updateDoc(doc(db, "QuotesDB", auth.currentUser.uid), {
         quotes: arrayUnion({
-          book: book,
+          book: bookInfo,
           quote: quote,
           page: page,
           id: uuidv4(),
