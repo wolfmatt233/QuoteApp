@@ -10,45 +10,60 @@ export default function Quotes() {
 
   const getQuotes = async () => {
     const userDoc = await getDoc(doc(db, "QuotesDB", auth.currentUser.uid));
-    setQuoteArr(userDoc.data().quotes);
-    console.log(quoteArr);
+    if (userDoc.data()) {
+      setQuoteArr(userDoc.data().quotes);
+    }
   };
 
   useEffect(() => {
     getQuotes();
   }, []);
 
-  useEffect(() => {
-    console.log(quoteArr);
-  }, [quoteArr]);
-
   return (
     <Container sx={appStyle}>
       <Paper sx={mainContainer}>
         <Typography variant="h5">Your Quotes</Typography>
         {quoteArr.map((quoteObj, idx) => {
-          return (
-            <QuoteBox
-              bookId={quoteObj.book}
-              quote={quoteObj.quote}
-              page={quoteObj.page}
-              key={idx}
-            />
-          );
+          if (!quoteObj.type) {
+            return (
+              <QuoteBox
+                bookId={quoteObj.book}
+                quote={quoteObj.quote}
+                page={quoteObj.page}
+                key={idx}
+              />
+            );
+          }
+
+          if (quoteObj.type == "manual") {
+            return (
+              <QuoteBox
+                type="manual"
+                title={quoteObj.title}
+                author={quoteObj.author}
+                image={quoteObj.image}
+                quote={quoteObj.quote}
+                page={quoteObj.page}
+                key={idx}
+              />
+            );
+          }
         })}
       </Paper>
     </Container>
   );
 }
+
 //Access book via api: https://openlibrary.org/books/OL50987839M.json
 //Image: https://covers.openlibrary.org/b/id/14595640-S.jpg
 
 const mainContainer = {
-  height: "500px",
+  minHeight: "500px",
   p: "20px",
   position: "relative",
   bgcolor: "#284B63",
   borderRadius: "10px",
   minHeight: "93%",
   color: "#fff",
+  mb: "40px",
 };
