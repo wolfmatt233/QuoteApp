@@ -1,15 +1,25 @@
 {
   "files": {
-    "main.css": "/QuoteApp/static/css/main.dbc51faf.css",
-    "main.js": "/QuoteApp/static/js/main.32c69c55.js",
+    "main.css": "/QuoteApp/static/css/main.a5e686bc.css",
+    "main.js": "/QuoteApp/static/js/main.fa655c06.js",
     "static/js/453.020061ae.chunk.js": "/QuoteApp/static/js/453.020061ae.chunk.js",
+    "static/media/caveat-cyrillic-wght-normal.woff2": "/QuoteApp/static/media/caveat-cyrillic-wght-normal.66d748a0b10c0701e2c4.woff2",
+    "static/media/caveat-latin-wght-normal.woff2": "/QuoteApp/static/media/caveat-latin-wght-normal.566819e6881dda99ca61.woff2",
+    "static/media/caveat-cyrillic-ext-wght-normal.woff2": "/QuoteApp/static/media/caveat-cyrillic-ext-wght-normal.e9efc4de9087058cf5d3.woff2",
+    "static/media/comfortaa-latin-wght-normal.woff2": "/QuoteApp/static/media/comfortaa-latin-wght-normal.5314e8de81df44039746.woff2",
+    "static/media/caveat-latin-ext-wght-normal.woff2": "/QuoteApp/static/media/caveat-latin-ext-wght-normal.e5c9983da00212f2f17b.woff2",
+    "static/media/comfortaa-latin-ext-wght-normal.woff2": "/QuoteApp/static/media/comfortaa-latin-ext-wght-normal.c0f3771c9250820a68e3.woff2",
+    "static/media/comfortaa-cyrillic-wght-normal.woff2": "/QuoteApp/static/media/comfortaa-cyrillic-wght-normal.fa39a4c594a1b8455e4d.woff2",
+    "static/media/comfortaa-cyrillic-ext-wght-normal.woff2": "/QuoteApp/static/media/comfortaa-cyrillic-ext-wght-normal.b4f11dba8ce4e85f2c5f.woff2",
+    "static/media/comfortaa-greek-wght-normal.woff2": "/QuoteApp/static/media/comfortaa-greek-wght-normal.8196841bef45bf2abf7a.woff2",
+    "static/media/comfortaa-vietnamese-wght-normal.woff2": "/QuoteApp/static/media/comfortaa-vietnamese-wght-normal.654e4338a2fa1f05718b.woff2",
     "index.html": "/QuoteApp/index.html",
-    "main.dbc51faf.css.map": "/QuoteApp/static/css/main.dbc51faf.css.map",
-    "main.32c69c55.js.map": "/QuoteApp/static/js/main.32c69c55.js.map",
+    "main.a5e686bc.css.map": "/QuoteApp/static/css/main.a5e686bc.css.map",
+    "main.fa655c06.js.map": "/QuoteApp/static/js/main.fa655c06.js.map",
     "453.020061ae.chunk.js.map": "/QuoteApp/static/js/453.020061ae.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dbc51faf.css",
-    "static/js/main.32c69c55.js"
+    "static/css/main.a5e686bc.css",
+    "static/js/main.fa655c06.js"
   ]
 }
