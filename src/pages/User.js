@@ -11,8 +11,8 @@ import {
 import { appStyle } from "../AppSx";
 import { auth, db } from "../credentials";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import PasswordModal from "./components/PasswordModal";
-import DeleteModal from "./components/DeleteModal";
+import PasswordModal from "./modals/PasswordModal";
+import DeleteModal from "./modals/DeleteModal";
 
 export default function User() {
   const [userDoc, setUserDoc] = useState();

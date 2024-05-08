@@ -2,7 +2,11 @@ import {
   AppBar,
   Box,
   Button,
+  ButtonBase,
   Container,
+  IconButton,
+  Menu,
+  MenuItem,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -16,6 +20,9 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./credentials";
 import User from "./pages/User";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Logo from "./assets/logo.png";
+import "@fontsource-variable/comfortaa";
 
 function App() {
   useEffect(() => {
@@ -48,34 +55,40 @@ function App() {
 
   return (
     <Box>
-      <AppBar component="nav" sx={{ bgcolor: "#284B63" }}>
+      <AppBar component="nav" sx={{ bgcolor: "#fff" }}>
         <Container sx={{ maxWidth: "1000px" }}>
-          <Toolbar disableGutters>
-            <MenuBookIcon sx={{color:"#fff", mr:"5px"}}/>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{
-                flexGrow: 1,
-                color: "#fff",
-                cursor: "pointer",
-                display: { xs: "none", sm: "block" },
-              }}
-              onClick={() => setCurPage(pages.home)}
-            >
-              MyQuotes
-            </Typography>
+          <Toolbar disableGutters sx={navSplit}>
+            <ButtonBase onClick={() => setCurPage(pages.home)}>
+              <Box
+                component="img"
+                src={Logo}
+                sx={{ width: "40px", mr: "5px" }}
+              />
+              <Typography
+                variant="h5"
+                noWrap
+                component="div"
+                fontFamily="Comfortaa Variable"
+                sx={{
+                  flexGrow: 1,
+                  color: "#000",
+                  cursor: "pointer",
+                  display: { xs: "none", sm: "block" },
+                }}
+              >
+                MyQuotes
+              </Typography>
+            </ButtonBase>
             {userButtons == false ? (
               <Box>
                 <Button
-                  sx={{ color: "#fff" }}
+                  sx={{ color: "#6d737f" }}
                   onClick={() => setCurPage(pages.login)}
                 >
                   Login
                 </Button>
                 <Button
-                  sx={{ color: "#fff" }}
+                  sx={{ color: "#6d737f" }}
                   onClick={() => setCurPage(pages.signup)}
                 >
                   Create Account
@@ -84,24 +97,30 @@ function App() {
             ) : (
               <Box>
                 <Button
-                  sx={{ color: "#fff" }}
-                  onClick={() => setCurPage(pages.addQuotes)}
+                  sx={{ color: "#6d737f" }}
+                  onClick={() => {
+                    setCurPage(pages.addQuotes);
+                  }}
                 >
                   Add a Quote
                 </Button>
                 <Button
-                  sx={{ color: "#fff" }}
-                  onClick={() => setCurPage(pages.quotes)}
+                  sx={{ color: "#6d737f" }}
+                  onClick={() => {
+                    setCurPage(pages.quotes);
+                  }}
                 >
                   Your Quotes
                 </Button>
                 <Button
-                  sx={{ color: "#fff" }}
-                  onClick={() => setCurPage(pages.user)}
+                  sx={{ color: "#6d737f" }}
+                  onClick={() => {
+                    setCurPage(pages.user);
+                  }}
                 >
                   Account
                 </Button>
-                <Button sx={{ color: "#fff" }} onClick={logOut}>
+                <Button sx={{ color: "#6d737f" }} onClick={logOut}>
                   Log Out
                 </Button>
               </Box>
@@ -114,8 +133,10 @@ function App() {
   );
 }
 
-const buttonsContainer = {
-  maxWidth: "100%",
+const navSplit = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
 };
 
 export default App;

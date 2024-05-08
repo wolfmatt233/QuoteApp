@@ -15,6 +15,7 @@ import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import { auth, db } from "../../credentials";
 import CloseIcon from "@mui/icons-material/Close";
+import { addPaper } from "../../AppSx";
 
 export default function AddForm() {
   const [query, setQuery] = useState("");
@@ -24,6 +25,8 @@ export default function AddForm() {
   const [book, setBook] = useState("");
   const [quote, setQuote] = useState("");
   const [page, setPage] = useState("");
+
+  //error handling
   const [searchError, setSearchError] = useState(false);
   const [searchErrorText, setSearchErrorText] = useState("");
   const [quoteError, setQuoteError] = useState(false);
@@ -88,11 +91,9 @@ export default function AddForm() {
       setPageError(true);
       setPageErrorText("Enter a page number");
     } else {
-      let bookInfo = book.split("&");
-
       await updateDoc(doc(db, "QuotesDB", auth.currentUser.uid), {
         quotes: arrayUnion({
-          book: bookInfo,
+          book: book,
           quote: quote,
           page: page,
           id: uuidv4(),
@@ -141,7 +142,7 @@ export default function AddForm() {
             return options.title + " - " + options.author_name;
           }
         }}
-        sx={addInput}
+        sx={{ mt: "15px" }}
         value={selected}
         onChange={handleSelect}
         id="bookAutocomplete"
@@ -174,7 +175,7 @@ export default function AddForm() {
       />
 
       <TextField
-        sx={addInput}
+        sx={{ mt: "15px" }}
         multiline
         rows={4}
         id="quote"
@@ -189,7 +190,7 @@ export default function AddForm() {
       />
 
       <TextField
-        sx={addInput}
+        sx={{ mt: "15px" }}
         id="pageNum"
         label="Page Number"
         variant="outlined"
@@ -203,24 +204,10 @@ export default function AddForm() {
           setPage(e.target.value);
         }}
       />
-      <Button variant="contained" sx={addBtn} onClick={addQuote}>
+      <Button variant="contained" sx={{ mt: "15px" }} onClick={addQuote}>
         Add Quote
       </Button>
     </Paper>
   );
 }
 
-const addInput = {
-  width: "100%",
-  mt: "15px",
-};
-
-const addBtn = {
-  mt: "15px",
-};
-
-const addPaper = {
-  p: "15px",
-  display: "flex",
-  flexDirection: "column",
-};

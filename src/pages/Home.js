@@ -5,7 +5,7 @@ import { appStyle } from "../AppSx";
 export default function Home() {
   return (
     <Container sx={appStyle}>
-      <Paper sx={homeHero} elevation={4}>
+      <Box sx={homeBox} elevation={4}>
         <Typography variant="h4" sx={heroTitle}>
           Welcome To MyQuotes!
         </Typography>
@@ -34,19 +34,14 @@ export default function Home() {
             <Typography sx={bookwords}>Share your quotes</Typography>
           </Paper>
         </Box>
-      </Paper>
+      </Box>
     </Container>
   );
 }
 
-const homeHero = {
-  height: "500px",
-  p: "20px",
-  textAlign: "center",
+const homeBox = {
   position: "relative",
-  bgcolor: "#284B63",
-  borderRadius: "10px",
-  minHeight: "93%"
+  textAlign: "center",
 };
 
 const heroTitle = {
@@ -55,14 +50,12 @@ const heroTitle = {
 };
 
 const heroContainer = {
-  position: "absolute",
   width: "100%",
-  top: "55%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-evenly",
+  flexWrap: "wrap",
+  mt: "20px",
 };
 
 // Credit to Poulami Chakraborty for the book inspiration: https://codepen.io/poulamic/pen/RwrKqmb
@@ -80,6 +73,7 @@ const heroInfo = {
   color: "#fff",
   overflow: "hidden",
   borderRadius: "15px 10px 10px 15px",
+  mt: "20px",
 };
 
 const bookline = {

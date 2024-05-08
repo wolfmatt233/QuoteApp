@@ -33,7 +33,7 @@ export default function AddQuotes() {
   return (
     <Container sx={appStyle}>
       {curPage}
-      <Paper sx={{ p: "10px", mt: "20px", mb: "40px" }}>
+      <Paper elevation={8} sx={{ p: "10px", mt: "20px", mb: "40px" }}>
         <Typography>{changeText}</Typography>
         <Button onClick={changePage}>{buttonText}</Button>
       </Paper>

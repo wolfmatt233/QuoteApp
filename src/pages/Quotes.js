@@ -1,12 +1,32 @@
 import { useEffect, useState } from "react";
-import { Box, Container, Paper, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Container,
+  IconButton,
+  Snackbar,
+  Typography,
+} from "@mui/material";
 import { appStyle } from "../AppSx";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../credentials";
 import QuoteBox from "./components/QuoteBox";
+import DeleteQModal from "./modals/DeleteQModal";
 
 export default function Quotes() {
   const [quoteArr, setQuoteArr] = useState([]);
+  const [toggleDelModal, setToggleDelModal] = useState(false);
+  const [quoteTarget, setQuoteTarget] = useState();
+  const [toggleSnack, setToggleSnack] = useState(false);
+  const [snackMsg, setSnackMsg] = useState(true);
+
+  //feedback
+  const closeDelete = () => setToggleDelModal(false);
+  const openDelete = () => setToggleDelModal(true);
+  const resetTarget = () => setQuoteTarget("");
+  const openSnack = () => setToggleSnack(true);
+  const deleteMsg = () => setSnackMsg("Quote Deleted");
+  const editMsg = () => setSnackMsg("Quote Updated");
 
   const getQuotes = async () => {
     const userDoc = await getDoc(doc(db, "QuotesDB", auth.currentUser.uid));
@@ -17,16 +37,19 @@ export default function Quotes() {
 
   useEffect(() => {
     getQuotes();
-  }, []);
+  }, [quoteArr]);
 
   return (
     <Container sx={appStyle}>
-      <Paper sx={mainContainer}>
+      <Box sx={mainContainer} id="quoteBoxContainer">
         <Typography variant="h5">Your Quotes</Typography>
         {quoteArr.map((quoteObj, idx) => {
           if (!quoteObj.type) {
             return (
               <QuoteBox
+                openDelete={openDelete}
+                setTarget={setQuoteTarget}
+                id={quoteObj.id}
                 bookId={quoteObj.book}
                 quote={quoteObj.quote}
                 page={quoteObj.page}
@@ -39,6 +62,9 @@ export default function Quotes() {
             return (
               <QuoteBox
                 type="manual"
+                openDelete={openDelete}
+                setTarget={setQuoteTarget}
+                id={quoteObj.id}
                 title={quoteObj.title}
                 author={quoteObj.author}
                 image={quoteObj.image}
@@ -49,21 +75,44 @@ export default function Quotes() {
             );
           }
         })}
-      </Paper>
+      </Box>
+      <Snackbar
+        ContentProps={{
+          sx: {
+            background: "#fff",
+            color: "#000",
+          },
+        }}
+        open={toggleSnack}
+        autoHideDuration={6000}
+        onClose={() => setToggleSnack(false)}
+        message={"Quote Deleted"}
+      >
+        <Alert
+          onClose={() => setToggleSnack(false)}
+          severity="success"
+          variant="filled"
+        >
+          {snackMsg}
+        </Alert>
+      </Snackbar>
+      <DeleteQModal
+        setArr={setQuoteArr}
+        snackMsg={deleteMsg}
+        openSnack={openSnack}
+        resetTarget={resetTarget}
+        targetId={quoteTarget}
+        close={closeDelete}
+        toggle={toggleDelModal}
+      />
     </Container>
   );
 }
 
-//Access book via api: https://openlibrary.org/books/OL50987839M.json
-//Image: https://covers.openlibrary.org/b/id/14595640-S.jpg
-
 const mainContainer = {
   minHeight: "500px",
-  p: "20px",
   position: "relative",
-  bgcolor: "#284B63",
   borderRadius: "10px",
   minHeight: "93%",
-  color: "#fff",
   mb: "40px",
 };

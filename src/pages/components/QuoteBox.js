@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
-import { Box, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  ButtonBase,
+  IconButton,
+  Paper,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import "@fontsource-variable/caveat";
 import "@fontsource-variable/comfortaa";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function QuoteBox(props) {
   const [bookDetails, setBookDetails] = useState("");
@@ -40,15 +49,81 @@ export default function QuoteBox(props) {
     }
   }, [bookDetails]);
 
+  const handleDelete = () => {
+    props.openDelete();
+    props.setTarget(props.id);
+  };
+
   return (
-    <Paper sx={quotePaper}>
-      <Box
-        component="img"
-        src={cover}
-        sx={coverImage}
-      />
+    <Paper elevation={6} sx={quotePaper} className="quoteBox">
+      {props.bookId ? (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            mr: "20px",
+            justifyContent: "space-between",
+          }}
+          className="imgEditBox"
+        >
+          <Tooltip
+            title="Visit book on OpenLibrary"
+            arrow
+            placement="bottom-start"
+          >
+            <Box
+              component="img"
+              src={cover}
+              sx={coverImage}
+              onClick={() =>
+                window.open(`https://openlibrary.org/books/${props.bookId}`)
+              }
+            />
+          </Tooltip>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <IconButton>
+              <EditIcon fontSize="small" sx={{ ml: "3px", color: "#000" }} />
+            </IconButton>
+            <IconButton onClick={handleDelete}>
+              <DeleteIcon
+                fontSize="small"
+                sx={{ ml: "3px", color: "#000" }}
+              />
+            </IconButton>
+          </Box>
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            mr: "20px",
+            justifyContent: "space-between",
+          }}
+          className="imgEditBox"
+        >
+          <Box component="img" src={cover} sx={coverImageManual} />
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <IconButton>
+              <EditIcon fontSize="small" sx={{ ml: "3px", color: "#000" }} />
+            </IconButton>
+            <IconButton onClick={handleDelete}>
+              <DeleteIcon
+                fontSize="small"
+                sx={{ ml: "3px", color: "#000" }}
+              />
+            </IconButton>
+          </Box>
+        </Box>
+      )}
+
       <Box sx={quoteInfo}>
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
           <Typography sx={{ fontSize: "20px" }}>{title}</Typography>
           <Typography sx={{ whiteSpace: "pre-wrap", mt: "3px" }}>
             {" "}
@@ -75,15 +150,25 @@ export default function QuoteBox(props) {
 }
 
 const quotePaper = {
-  mt: "20px",
-  p: "10px",
+  mt: "25px",
+  p: "15px",
   display: "flex",
+  bgcolor: "#F2EECB",
+  position: "relative",
 };
 
 const coverImage = {
   height: "150px",
-  mr: "20px",
+  mb: "20px",
+  cursor: "pointer",
+  borderRadius: "3px",
+  boxShadow:
+    "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)",
+};
 
+const coverImageManual = {
+  height: "150px",
+  mb: "20px",
   borderRadius: "3px",
   boxShadow:
     "0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)",

@@ -1,8 +1,8 @@
 export const appStyle = {
   mt: "64px",
-  p: "40px 0",
   maxWidth: "1000px",
-  height: "calc(100vh - 64px)",
+  minHeight: "calc(100vh - 64px)",
+  p: "25px",
 };
 
 export const signupContainer = {
@@ -19,7 +19,7 @@ export const createInput = {
 };
 
 export const signupBtn = {
-  mt: "20px",
+  mb: "15px",
   width: "300px",
 };
 
@@ -32,4 +32,10 @@ export const modalStyle = {
   boxShadow: 24,
   borderRadius: "10px",
   p: 4,
+};
+
+export const addPaper = {
+  p: "15px",
+  display: "flex",
+  flexDirection: "column",
 };

@@ -15,6 +15,7 @@ import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import { auth, db } from "../../credentials";
 import CloseIcon from "@mui/icons-material/Close";
+import { addPaper } from "../../AppSx";
 
 export default function AddFormManual() {
   const [title, setTitle] = useState("");
@@ -56,6 +57,10 @@ export default function AddFormManual() {
     img.onerror = () => {
       setImageError(true);
       setImageErrorText("Invalid image url.");
+    };
+
+    img.onload = () => {
+      addQuote();
     };
   };
 
@@ -122,7 +127,7 @@ export default function AddFormManual() {
       <Typography variant="h5">Add a Quote Manually</Typography>
 
       <TextField
-        sx={addInput}
+        sx={{ mt: "15px" }}
         id="title"
         label="Book Title"
         variant="outlined"
@@ -135,7 +140,7 @@ export default function AddFormManual() {
       />
 
       <TextField
-        sx={addInput}
+        sx={{ mt: "15px" }}
         id="author"
         label="Book Author"
         variant="outlined"
@@ -148,7 +153,7 @@ export default function AddFormManual() {
       />
 
       <TextField
-        sx={addInput}
+        sx={{ mt: "15px" }}
         id="image"
         label="Cover Image"
         variant="outlined"
@@ -161,7 +166,7 @@ export default function AddFormManual() {
       />
 
       <TextField
-        sx={addInput}
+        sx={{ mt: "15px" }}
         multiline
         rows={4}
         id="quote"
@@ -176,7 +181,7 @@ export default function AddFormManual() {
       />
 
       <TextField
-        sx={addInput}
+        sx={{ mt: "15px" }}
         id="pageNum"
         label="Page Number"
         variant="outlined"
@@ -190,24 +195,9 @@ export default function AddFormManual() {
           setPage(e.target.value);
         }}
       />
-      <Button variant="contained" sx={addBtn} onClick={addQuote}>
+      <Button variant="contained" sx={{ mt: "15px" }} onClick={isValidUrl}>
         Add Quote
       </Button>
     </Paper>
   );
 }
-
-const addInput = {
-  width: "100%",
-  mt: "15px",
-};
-
-const addBtn = {
-  mt: "15px",
-};
-
-const addPaper = {
-  p: "15px",
-  display: "flex",
-  flexDirection: "column",
-};
