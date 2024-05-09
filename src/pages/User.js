@@ -61,7 +61,7 @@ export default function User() {
   return (
     <Container sx={appStyle}>
       <Paper elevation={1} sx={{ p: "10px", mb: "10px" }}>
-        <Typography variant="h5">{username}</Typography>
+        <Typography variant="h5">User: {username}</Typography>
       </Paper>
       <Paper elevation={6} sx={paperContainer}>
         <Box sx={boxContainer}>

@@ -12,12 +12,16 @@ import "@fontsource-variable/comfortaa";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditModal from "../modals/EditModal";
 
 export default function QuoteBox(props) {
   const [bookDetails, setBookDetails] = useState("");
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [cover, setCover] = useState("");
+  const [toggleEditModal, setToggleEditModal] = useState(false);
+  const closeEdit = () => setToggleEditModal(false);
+  const openEdit = () => setToggleEditModal(true);
 
   useEffect(() => {
     if (!props.type) {
@@ -35,7 +39,7 @@ export default function QuoteBox(props) {
       setTitle(props.title);
       setAuthor(props.author);
     }
-  }, [props]);
+  }, []);
 
   useEffect(() => {
     if (!props.type) {
@@ -51,6 +55,11 @@ export default function QuoteBox(props) {
 
   const handleDelete = () => {
     props.openDelete();
+    props.setTarget(props.id);
+  };
+
+  const handleEdit = () => {
+    openEdit();
     props.setTarget(props.id);
   };
 
@@ -86,14 +95,11 @@ export default function QuoteBox(props) {
               justifyContent: "center",
             }}
           >
-            <IconButton>
+            <IconButton onClick={handleEdit}>
               <EditIcon fontSize="small" sx={{ ml: "3px", color: "#000" }} />
             </IconButton>
             <IconButton onClick={handleDelete}>
-              <DeleteIcon
-                fontSize="small"
-                sx={{ ml: "3px", color: "#000" }}
-              />
+              <DeleteIcon fontSize="small" sx={{ ml: "3px", color: "#000" }} />
             </IconButton>
           </Box>
         </Box>
@@ -109,14 +115,11 @@ export default function QuoteBox(props) {
         >
           <Box component="img" src={cover} sx={coverImageManual} />
           <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <IconButton>
+            <IconButton onClick={handleEdit}>
               <EditIcon fontSize="small" sx={{ ml: "3px", color: "#000" }} />
             </IconButton>
             <IconButton onClick={handleDelete}>
-              <DeleteIcon
-                fontSize="small"
-                sx={{ ml: "3px", color: "#000" }}
-              />
+              <DeleteIcon fontSize="small" sx={{ ml: "3px", color: "#000" }} />
             </IconButton>
           </Box>
         </Box>
@@ -145,6 +148,18 @@ export default function QuoteBox(props) {
           Page {props.page}
         </Typography>
       </Box>
+
+      <EditModal
+        setArr={props.setArr}
+        snackMsg={props.snackMsg}
+        openSnack={props.openSnack}
+        resetTarget={props.resetTarget}
+        targetId={props.targetId}
+        close={closeEdit}
+        toggle={toggleEditModal}
+        quote={props.quote}
+        page={props.page}
+      />
     </Paper>
   );
 }

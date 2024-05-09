@@ -46,7 +46,6 @@ const homeBox = {
 
 const heroTitle = {
   mt: "20px",
-  color: "#fff",
 };
 
 const heroContainer = {

@@ -16,7 +16,7 @@ import DeleteQModal from "./modals/DeleteQModal";
 export default function Quotes() {
   const [quoteArr, setQuoteArr] = useState([]);
   const [toggleDelModal, setToggleDelModal] = useState(false);
-  const [quoteTarget, setQuoteTarget] = useState();
+  const [quoteTarget, setQuoteTarget] = useState("");
   const [toggleSnack, setToggleSnack] = useState(false);
   const [snackMsg, setSnackMsg] = useState(true);
 
@@ -37,7 +37,7 @@ export default function Quotes() {
 
   useEffect(() => {
     getQuotes();
-  }, [quoteArr]);
+  }, []);
 
   return (
     <Container sx={appStyle}>
@@ -54,6 +54,11 @@ export default function Quotes() {
                 quote={quoteObj.quote}
                 page={quoteObj.page}
                 key={idx}
+                setArr={setQuoteArr}
+                snackMsg={editMsg}
+                openSnack={openSnack}
+                resetTarget={resetTarget}
+                targetId={quoteTarget}
               />
             );
           }
@@ -71,6 +76,11 @@ export default function Quotes() {
                 quote={quoteObj.quote}
                 page={quoteObj.page}
                 key={idx}
+                setArr={setQuoteArr}
+                snackMsg={editMsg}
+                openSnack={openSnack}
+                resetTarget={resetTarget}
+                targetId={quoteTarget}
               />
             );
           }
