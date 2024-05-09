@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import { appStyle, createInput, signupContainer, signupBtn } from "../AppSx";
 import { createUserWithEmailAndPassword } from "firebase/auth";

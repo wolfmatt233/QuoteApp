@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography, Modal } from "@mui/material";
+import { Box, Button, Typography, Modal } from "@mui/material";
 import { signupContainer, signupBtn, modalStyle } from "../../AppSx";
 import { auth, db } from "../../credentials";
 import { getDoc, doc, updateDoc } from "firebase/firestore";

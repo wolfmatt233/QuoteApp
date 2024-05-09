@@ -3,7 +3,6 @@ import {
   Alert,
   Box,
   Container,
-  IconButton,
   Snackbar,
   Typography,
 } from "@mui/material";

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { signupContainer, modalStyle } from "../../AppSx";
 import { auth, db } from "../../credentials";
 import {

@@ -2,7 +2,7 @@ import { Button, Container, Paper, Typography } from "@mui/material";
 import { appStyle } from "../AppSx";
 import AddForm from "./components/AddForm";
 import AddFormManual from "./components/AddFormManual";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function AddQuotes() {
   const pages = {
