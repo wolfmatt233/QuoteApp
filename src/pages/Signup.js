@@ -73,7 +73,6 @@ export default function Signup() {
           id="password"
           label="Password"
           variant="outlined"
-          secur
           type="password"
           onChange={(e) => {
             setPassword(e.target.value);
@@ -91,7 +90,11 @@ export default function Signup() {
             setCheckPass(e.target.value);
           }}
         />
-        <Button sx={signupBtn} variant="contained" onClick={signUp}>
+        <Button
+          sx={{ mt: "15px", width: "300px" }}
+          variant="contained"
+          onClick={signUp}
+        >
           Sign Up
         </Button>
       </Box>

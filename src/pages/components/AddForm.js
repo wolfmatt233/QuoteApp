@@ -157,12 +157,13 @@ export default function AddForm() {
           />
         )}
         renderOption={(props, option) => {
+          let id = option.key.split("/")[2]
           return (
             <Box
               component="li"
               sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
               {...props}
-              id={option.cover_edition_key}
+              id={id}
               key={option.idx}
             >
               <img

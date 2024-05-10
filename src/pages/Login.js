@@ -52,7 +52,7 @@ export default function Login() {
             setPassword(e.target.value);
           }}
         />
-        <Button sx={signupBtn} variant="contained" onClick={signIn}>
+        <Button sx={{ mt: "15px", width: "300px" }} variant="contained" onClick={signIn}>
           Sign In
         </Button>
       </Box>

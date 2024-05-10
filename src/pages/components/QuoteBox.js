@@ -24,7 +24,7 @@ export default function QuoteBox(props) {
 
   useEffect(() => {
     if (!props.type) {
-      fetch(`https://openlibrary.org/books/${props.bookId}.json`)
+      fetch(`https://openlibrary.org/works/${props.bookId}.json`)
         .then((response) => response.json())
         .then((response) => {
           setBookDetails(response);
@@ -43,7 +43,7 @@ export default function QuoteBox(props) {
   useEffect(() => {
     if (!props.type) {
       if (bookDetails.length != "") {
-        fetch(`https://openlibrary.org${bookDetails.authors[0].key}.json`)
+        fetch(`https://openlibrary.org${bookDetails.authors[0].author.key}.json`)
           .then((response) => response.json())
           .then((response) => {
             setAuthor(response.name);
