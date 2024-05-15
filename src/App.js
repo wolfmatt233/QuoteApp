@@ -156,9 +156,11 @@ function App() {
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <Button sx={drawerBtn} onClick={() => setCurPage(pages.login)}>
               Login
+              <LoginIcon sx={{ ml: "5px", fontSize: "15px" }} />
             </Button>
             <Button sx={drawerBtn} onClick={() => setCurPage(pages.signup)}>
               Create Account
+              <PersonAddAltIcon sx={{ ml: "5px", fontSize: "15px" }} />
             </Button>
           </Box>
         ) : (
