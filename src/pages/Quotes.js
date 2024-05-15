@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-import {
-  Alert,
-  Box,
-  Container,
-  Snackbar,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Container, Snackbar, Typography } from "@mui/material";
 import { appStyle } from "../AppSx";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../credentials";
 import QuoteBox from "./components/QuoteBox";
 import DeleteQModal from "./modals/DeleteQModal";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 export default function Quotes() {
   const [quoteArr, setQuoteArr] = useState([]);
@@ -41,7 +36,16 @@ export default function Quotes() {
   return (
     <Container sx={appStyle}>
       <Box sx={mainContainer} id="quoteBoxContainer">
-        <Typography variant="h5">Your Quotes</Typography>
+        <Typography
+          variant="h5"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <BookmarkIcon sx={{ mr: "3px" }} />
+          Your Quotes
+        </Typography>
         {quoteArr.map((quoteObj, idx) => {
           if (!quoteObj.type) {
             return (
@@ -124,4 +128,6 @@ const mainContainer = {
   borderRadius: "10px",
   minHeight: "93%",
   mb: "40px",
+  bgcolor: "#fff",
+  padding: "10px",
 };

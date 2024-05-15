@@ -60,60 +60,64 @@ export default function User() {
 
   return (
     <Container sx={appStyle}>
-      <Paper elevation={1} sx={{ p: "10px", mb: "10px" }}>
-        <Typography variant="h5">User: {username}</Typography>
-      </Paper>
-      <Paper elevation={6} sx={paperContainer}>
-        <Box sx={boxContainer}>
-          <TextField
-            variant="outlined"
-            label="New Username"
-            disabled={nameToggle}
-            onChange={(e) => setNewUsername(e.target.value)}
-          />
+      <Paper sx={{ p: "10px" }}>
+        <Typography variant="h5" sx={{ p: "10px", mb: "10px" }}>
+          User: {username}
+        </Typography>
+        <Paper elevation={6} sx={paperContainer}>
+          <Box sx={boxContainer}>
+            <TextField
+              variant="outlined"
+              label="New Username"
+              disabled={nameToggle}
+              onChange={(e) => setNewUsername(e.target.value)}
+            />
+            <Button
+              variant="contained"
+              sx={{ ml: "10px", height: "56px" }}
+              disabled={nameToggle}
+              onClick={changeUsername}
+            >
+              Confirm
+            </Button>
+          </Box>
           <Button
             variant="contained"
-            sx={{ ml: "10px", height: "56px" }}
-            disabled={nameToggle}
-            onClick={changeUsername}
+            onClick={() => {
+              if (editText === "Edit") {
+                setNameToggle(false);
+                setEditText("Cancel");
+              } else if (editText === "Cancel") {
+                setNameToggle(true);
+                setEditText("Edit");
+              }
+            }}
+
+            sx={{mt: {xs: "10px"}}}
           >
+            {editText}
+          </Button>
+        </Paper>
+        <Paper elevation={6} sx={paperContainer}>
+          <Typography>Change Password</Typography>
+          <Button variant="contained" onClick={openPassword}>
+            Change
+          </Button>
+        </Paper>
+        <Paper elevation={6} sx={paperContainer}>
+          <Typography>Delete Account</Typography>
+          <Button variant="contained" onClick={openModal}>
             Confirm
           </Button>
-        </Box>
-        <Button
-          variant="contained"
-          onClick={() => {
-            if (editText === "Edit") {
-              setNameToggle(false);
-              setEditText("Cancel");
-            } else if (editText === "Cancel") {
-              setNameToggle(true);
-              setEditText("Edit");
-            }
-          }}
-        >
-          {editText}
-        </Button>
+        </Paper>
+        {alert}
+        <DeleteModal toggle={toggleModal} close={closeModal} />
+        <PasswordModal
+          toggle={togglePassword}
+          close={closePassword}
+          setAlert={setAlert}
+        />
       </Paper>
-      <Paper elevation={6} sx={paperContainer}>
-        <Typography>Change Password</Typography>
-        <Button variant="contained" onClick={openPassword}>
-          Change
-        </Button>
-      </Paper>
-      <Paper elevation={6} sx={paperContainer}>
-        <Typography>Delete Account</Typography>
-        <Button variant="contained" onClick={openModal}>
-          Confirm
-        </Button>
-      </Paper>
-      {alert}
-      <DeleteModal toggle={toggleModal} close={closeModal} />
-      <PasswordModal
-        toggle={togglePassword}
-        close={closePassword}
-        setAlert={setAlert}
-      />
     </Container>
   );
 }
@@ -124,6 +128,7 @@ const paperContainer = {
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
+  flexWrap:"wrap"
 };
 
 const boxContainer = {

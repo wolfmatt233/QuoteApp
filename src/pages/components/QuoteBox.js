@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Box,
-  IconButton,
-  Paper,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Box, IconButton, Paper, Tooltip, Typography } from "@mui/material";
 import "@fontsource-variable/caveat";
 import "@fontsource-variable/comfortaa";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
@@ -43,7 +37,9 @@ export default function QuoteBox(props) {
   useEffect(() => {
     if (!props.type) {
       if (bookDetails.length != "") {
-        fetch(`https://openlibrary.org${bookDetails.authors[0].author.key}.json`)
+        fetch(
+          `https://openlibrary.org${bookDetails.authors[0].author.key}.json`
+        )
           .then((response) => response.json())
           .then((response) => {
             setAuthor(response.name);
@@ -67,12 +63,9 @@ export default function QuoteBox(props) {
       {props.bookId ? (
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
+            maxWidth: "10%",
             mr: "20px",
-            justifyContent: "space-between",
           }}
-          className="imgEditBox"
         >
           <Tooltip
             title="Visit book on OpenLibrary"
@@ -88,39 +81,15 @@ export default function QuoteBox(props) {
               }
             />
           </Tooltip>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <IconButton onClick={handleEdit}>
-              <EditIcon fontSize="small" sx={{ ml: "3px", color: "#000" }} />
-            </IconButton>
-            <IconButton onClick={handleDelete}>
-              <DeleteIcon fontSize="small" sx={{ ml: "3px", color: "#000" }} />
-            </IconButton>
-          </Box>
         </Box>
       ) : (
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
+            maxWidth: "10%",
             mr: "20px",
-            justifyContent: "space-between",
           }}
-          className="imgEditBox"
         >
           <Box component="img" src={cover} sx={coverImageManual} />
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <IconButton onClick={handleEdit}>
-              <EditIcon fontSize="small" sx={{ ml: "3px", color: "#000" }} />
-            </IconButton>
-            <IconButton onClick={handleDelete}>
-              <DeleteIcon fontSize="small" sx={{ ml: "3px", color: "#000" }} />
-            </IconButton>
-          </Box>
         </Box>
       )}
 
@@ -146,6 +115,14 @@ export default function QuoteBox(props) {
         <Typography sx={{ alignSelf: "flex-end", mt: "5px" }}>
           Page {props.page}
         </Typography>
+        <Box sx={{ minWidth: "70px", display: "flex", alignSelf: "flex-end" }}>
+          <IconButton onClick={handleEdit}>
+            <EditIcon fontSize="small" sx={{ color: "#000" }} />
+          </IconButton>
+          <IconButton onClick={handleDelete}>
+            <DeleteIcon fontSize="small" sx={{ color: "#000" }} />
+          </IconButton>
+        </Box>
       </Box>
 
       <EditModal
@@ -172,7 +149,7 @@ const quotePaper = {
 };
 
 const coverImage = {
-  height: "150px",
+  width: "100%",
   mb: "20px",
   cursor: "pointer",
   borderRadius: "3px",
@@ -181,7 +158,7 @@ const coverImage = {
 };
 
 const coverImageManual = {
-  height: "150px",
+  width: "100%",
   mb: "20px",
   borderRadius: "3px",
   boxShadow:

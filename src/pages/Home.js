@@ -7,7 +7,7 @@ export default function Home() {
     <Container sx={appStyle}>
       <Box sx={homeBox} elevation={4}>
         <Typography variant="h4" sx={heroTitle}>
-          Welcome To MyQuotes!
+          Welcome To QuoteScribe!
         </Typography>
         <Box sx={heroContainer}>
           <Paper sx={heroInfo} elevation={6}>
@@ -15,7 +15,7 @@ export default function Home() {
             <div style={booktitle}></div>
             <div style={booktitle2}></div>
             <div style={bookpages}></div>
-            <Typography sx={bookwords}>Create an account</Typography>
+            <Typography sx={bookwords}>Create an account!</Typography>
           </Paper>
           <Paper sx={heroInfo} elevation={6}>
             <div style={bookline} />
@@ -23,7 +23,7 @@ export default function Home() {
             <div style={booktitle2}></div>
             <div style={bookpages}></div>
             <Typography sx={bookwords}>
-              Keep track of quotes from your favorite books
+              Keep track of quotes from your favorite books!
             </Typography>
           </Paper>
           <Paper sx={heroInfo} elevation={6}>
@@ -31,7 +31,7 @@ export default function Home() {
             <div style={booktitle}></div>
             <div style={booktitle2}></div>
             <div style={bookpages}></div>
-            <Typography sx={bookwords}>Share your quotes</Typography>
+            <Typography sx={bookwords}>Share your quotes!</Typography>
           </Paper>
         </Box>
       </Box>
@@ -61,6 +61,7 @@ const heroContainer = {
 
 const heroInfo = {
   p: "15px",
+  m: "3px",
   pr: "20px",
   bgcolor: "#3d5470",
   height: "250px",
