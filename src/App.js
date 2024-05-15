@@ -154,16 +154,10 @@ function App() {
       >
         {userButtons == false ? (
           <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Button
-              sx={{ color: "#6d737f" }}
-              onClick={() => setCurPage(pages.login)}
-            >
+            <Button sx={drawerBtn} onClick={() => setCurPage(pages.login)}>
               Login
             </Button>
-            <Button
-              sx={{ color: "#6d737f" }}
-              onClick={() => setCurPage(pages.signup)}
-            >
+            <Button sx={drawerBtn} onClick={() => setCurPage(pages.signup)}>
               Create Account
             </Button>
           </Box>
