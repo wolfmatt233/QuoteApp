@@ -1,6 +1,12 @@
-import { useEffect, useState } from "react";
-import { Box, Container, TextField, Button, Typography } from "@mui/material";
-import { appStyle, createInput, signupContainer, signupBtn } from "../AppSx";
+import {  useState } from "react";
+import {
+  Container,
+  TextField,
+  Button,
+  Typography,
+  Paper,
+} from "@mui/material";
+import { appStyle, createInput, signupBtn } from "../AppSx";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../credentials";
 
@@ -27,9 +33,8 @@ export default function Login() {
 
   return (
     <Container sx={appStyle}>
-      <Box sx={signupContainer}>
+      <Paper sx={loginContainer}>
         <Typography variant="h5">Log In</Typography>
-
         <TextField
           error={inputError}
           sx={createInput}
@@ -52,10 +57,22 @@ export default function Login() {
             setPassword(e.target.value);
           }}
         />
-        <Button sx={{ mt: "15px", width: "300px" }} variant="contained" onClick={signIn}>
+        <Button
+          sx={signupBtn}
+          variant="contained"
+          onClick={signIn}
+        >
           Sign In
         </Button>
-      </Box>
+      </Paper>
     </Container>
   );
 }
+
+const loginContainer = {
+  textAlign: "center",
+  padding: "20px 40px",
+  borderRadius: "10px",
+  margin: "0 auto",
+  maxWidth: "300px",
+};

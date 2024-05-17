@@ -183,6 +183,7 @@ export default function AddFormManual() {
         id="pageNum"
         label="Page Number"
         variant="outlined"
+        type="number"
         error={pageError}
         helperText={pageErrorText}
         InputProps={{

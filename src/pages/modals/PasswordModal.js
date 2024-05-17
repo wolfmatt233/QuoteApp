@@ -6,10 +6,11 @@ import {
   Typography,
   Modal,
   Alert,
+  Paper,
 } from "@mui/material";
 import {
   createInput,
-  signupContainer,
+  modalContainer,
   signupBtn,
   modalStyle,
 } from "../../AppSx";
@@ -60,9 +61,8 @@ export default function DeleteModal(props) {
         props.close();
       }}
     >
-      <Box sx={modalStyle}>
-        <Box sx={signupContainer}>
-          <Typography variant="h5">Log In To Confirm</Typography>
+      <Paper sx={modalStyle}>
+          <Typography variant="h5" sx={{mb:"10px"}}>Log In To Confirm</Typography>
           <TextField
             error={inputError}
             sx={createInput}
@@ -98,8 +98,7 @@ export default function DeleteModal(props) {
           <Button sx={signupBtn} variant="contained" onClick={reauthenticate}>
             Change Password
           </Button>
-        </Box>
-      </Box>
+      </Paper>
     </Modal>
   );
 }

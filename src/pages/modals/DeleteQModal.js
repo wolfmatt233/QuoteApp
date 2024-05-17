@@ -1,5 +1,5 @@
-import { Box, Button, Typography, Modal } from "@mui/material";
-import { signupContainer, signupBtn, modalStyle } from "../../AppSx";
+import { Box, Button, Typography, Modal, Paper } from "@mui/material";
+import { modalContainer, signupBtn, modalStyle } from "../../AppSx";
 import { auth, db } from "../../credentials";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
 
@@ -31,29 +31,26 @@ export default function DeleteQModal(props) {
         props.resetTarget();
       }}
     >
-      <Box sx={modalStyle}>
-        <Box sx={signupContainer}>
-          <Typography variant="h5" sx={{ mb: "20px" }}>
-            Delete Quote?
-          </Typography>
-          <Button
-            sx={signupBtn}
-            color="error"
-            variant="contained"
-            onClick={deleteQuote}
-          >
-            Delete
-          </Button>
-          <Button
-            sx={signupBtn}
-            color="primary"
-            variant="contained"
-            onClick={() => props.close()}
-          >
-            Cancel
-          </Button>
-        </Box>
-      </Box>
+      <Paper sx={modalStyle}>
+        <Typography variant="h5" sx={{mb:"10px", textAlign:"center"}}>
+          Delete Quote?
+        </Typography>
+        <Button
+          sx={signupBtn}
+          color="error"
+          variant="contained"
+          onClick={deleteQuote}
+        >
+          Delete
+        </Button>
+        <Button
+          sx={signupBtn}
+          variant="outlined"
+          onClick={() => props.close()}
+        >
+          Cancel
+        </Button>
+      </Paper>
     </Modal>
   );
 }

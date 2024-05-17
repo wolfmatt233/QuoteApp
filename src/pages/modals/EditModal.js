@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { signupContainer, modalStyle } from "../../AppSx";
+import {
+  createInput,
+  modalStyle,
+  signupBtn,
+} from "../../AppSx";
 import { auth, db } from "../../credentials";
 import {
-  Box,
   Button,
   InputAdornment,
   Modal,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
@@ -18,7 +22,7 @@ export default function EditModal(props) {
   const [quoteErrorText, setQuoteErrorText] = useState("");
   const [pageError, setPageError] = useState(false);
   const [pageErrorText, setPageErrorText] = useState("");
-  
+
   const clearErrors = () => {
     setQuoteError(false);
     setQuoteErrorText("");
@@ -67,57 +71,57 @@ export default function EditModal(props) {
         setPage("");
       }}
     >
-      <Box sx={modalStyle}>
-        <Box sx={signupContainer}>
-          <Typography variant="h5">Edit Quote</Typography>
-          <TextField
-            InputLabelProps={{ shrink: true }}
-            error={quoteError}
-            helperText={quoteErrorText}
-            sx={{ width: "500px", mt: "20px" }}
-            defaultValue={props.quote}
-            multiline
-            rows={4}
-            id="quote"
-            label="Quote"
-            variant="outlined"
-            onChange={(e) => {
-              setQuote(e.target.value);
-            }}
-          />
-          <TextField
-            error={pageError}
-            helperText={pageErrorText}
-            sx={{ width: "500px", mt: "20px" }}
-            defaultValue={props.page}
-            id="page"
-            label="Page Number"
-            variant="outlined"
-            onChange={(e) => {
-              setPage(e.target.value);
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">#</InputAdornment>
-              ),
-            }}
-          />
-          <Button
-            sx={{ width: "300px", mt: "20px" }}
-            variant="contained"
-            onClick={editQuote}
-          >
-            Update
-          </Button>
-          <Button
-            sx={{ width: "300px", mt: "20px", bgcolor: "#808080" }}
-            variant="contained"
-            onClick={() => props.close()}
-          >
-            Cancel
-          </Button>
-        </Box>
-      </Box>
+      <Paper sx={modalStyle}>
+        <Typography variant="h5" sx={{ mb: "10px" }}>
+          Edit Quote
+        </Typography>
+        <TextField
+          InputLabelProps={{ shrink: true }}
+          error={quoteError}
+          helperText={quoteErrorText}
+          sx={createInput}
+          defaultValue={props.quote}
+          multiline
+          rows={4}
+          id="quote"
+          label="Quote"
+          variant="outlined"
+          onChange={(e) => {
+            setQuote(e.target.value);
+          }}
+        />
+        <TextField
+          error={pageError}
+          helperText={pageErrorText}
+          sx={createInput}
+          defaultValue={props.page}
+          id="page"
+          type="number"
+          label="Page Number"
+          variant="outlined"
+          onChange={(e) => {
+            setPage(e.target.value);
+          }}
+          InputProps={{
+            startAdornment: <InputAdornment position="start">#</InputAdornment>,
+          }}
+        />
+        <Button
+          sx={signupBtn}
+          variant="contained"
+          color="primary"
+          onClick={editQuote}
+        >
+          Update
+        </Button>
+        <Button
+          sx={signupBtn}
+          variant="outlined"
+          onClick={() => props.close()}
+        >
+          Cancel
+        </Button>
+      </Paper>
     </Modal>
   );
 }

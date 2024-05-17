@@ -5,33 +5,19 @@ export const appStyle = {
   p: "25px",
 };
 
-export const signupContainer = {
-  textAlign: "center",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "space-evenly",
-};
+export const createInput = { width: "100%", mt: "10px" };
 
-export const createInput = {
-  width: "300px",
-  mt: "20px",
-};
-
-export const signupBtn = {
-  mb: "15px",
-  width: "300px",
-};
+export const signupBtn = { mt: "15px", width: "100%" };
 
 export const modalStyle = {
-  bgcolor: "#fff",
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  boxShadow: 24,
   borderRadius: "10px",
   p: 4,
+  width: { xs: "80%", sm: "60%", md: "50%", xl: "50%", lg: "50%" },
+  maxWidth: "900px"
 };
 
 export const addPaper = {
