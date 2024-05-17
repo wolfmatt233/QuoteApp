@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
-import { Alert, Box, Container, Snackbar, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Container,
+  Pagination,
+  Snackbar,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { appStyle } from "../AppSx";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../credentials";
@@ -13,6 +21,10 @@ export default function Quotes() {
   const [quoteTarget, setQuoteTarget] = useState("");
   const [toggleSnack, setToggleSnack] = useState(false);
   const [snackMsg, setSnackMsg] = useState(true);
+
+  //pagination
+  const [buttonsArr, setButtonsArr] = useState([]);
+  const [curArr, setCurArr] = useState([]);
 
   //feedback
   const closeDelete = () => setToggleDelModal(false);
@@ -33,6 +45,45 @@ export default function Quotes() {
     getQuotes();
   }, []);
 
+  useEffect(() => {
+    if (quoteArr.length > 0) {
+      let amounts = quoteArr.length / 10 + ""; //14 qutoes -> 1.4
+      let splits = amounts.split("."); //[1, 4]
+      let pageNum = splits[0];
+      let remainder = splits[1];
+      if (remainder > 0) {
+        pageNum = parseInt(pageNum) + 1; //if 14 that means 1 full plus another
+      }
+
+      let pageButtons = [];
+
+      for (let i = 0; i < pageNum; i++) {
+        pageButtons.push(i);
+      }
+
+      setButtonsArr(pageButtons);
+      changePage(0);
+    }
+  }, [quoteArr]);
+
+  const changePage = (pageNum) => {
+    let newArr = [];
+    let endNum = pageNum;
+    let startNum = pageNum;
+
+    startNum = startNum + "" + 0;
+    startNum = parseInt(startNum);
+    endNum = startNum + 10;
+
+    quoteArr.forEach((quoteObj, idx) => {
+      if (idx >= startNum && idx < endNum) {
+        newArr.push(quoteObj);
+      }
+    });
+
+    setCurArr(newArr);
+  };
+
   return (
     <Container sx={appStyle}>
       <Box sx={mainContainer} id="quoteBoxContainer">
@@ -46,7 +97,16 @@ export default function Quotes() {
           <BookmarkIcon sx={{ mr: "3px" }} />
           Your Quotes
         </Typography>
-        {quoteArr.map((quoteObj, idx) => {
+        <Stack spacing={2} sx={{ mt: "15px" }}>
+          <Pagination
+            count={buttonsArr.length}
+            onChange={(event, value) => {
+              value -= 1;
+              changePage(value);
+            }}
+          />
+        </Stack>
+        {curArr.map((quoteObj, idx) => {
           if (!quoteObj.type) {
             return (
               <QuoteBox
@@ -56,7 +116,7 @@ export default function Quotes() {
                 bookId={quoteObj.book}
                 quote={quoteObj.quote}
                 page={quoteObj.page}
-                key={idx}
+                key={quoteObj.id}
                 setArr={setQuoteArr}
                 snackMsg={editMsg}
                 openSnack={openSnack}
@@ -88,6 +148,15 @@ export default function Quotes() {
             );
           }
         })}
+        <Stack spacing={2} sx={{ mt: "15px" }}>
+          <Pagination
+            count={buttonsArr.length}
+            onChange={(event, value) => {
+              value -= 1;
+              changePage(value);
+            }}
+          />
+        </Stack>
       </Box>
       <Snackbar
         ContentProps={{
