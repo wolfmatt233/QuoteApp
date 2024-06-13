@@ -112,9 +112,13 @@ export default function QuoteBox(props) {
           <FormatQuoteIcon sx={{ alignSelf: "flex-end" }} />
           <div style={triangle}></div>
         </Box>
-        <Typography sx={{ alignSelf: "flex-end", mt: "5px" }}>
-          Page {props.page}
-        </Typography>
+        {props.page ? (
+          <Typography sx={{ alignSelf: "flex-end", mt: "5px" }}>
+            Page {props.page}
+          </Typography>
+        ) : (
+          ""
+        )}
         <Box sx={{ minWidth: "70px", display: "flex", alignSelf: "flex-end" }}>
           <IconButton onClick={handleEdit}>
             <EditIcon fontSize="small" sx={{ color: "#000" }} />

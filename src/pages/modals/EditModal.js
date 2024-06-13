@@ -1,9 +1,5 @@
-import { useState } from "react";
-import {
-  createInput,
-  modalStyle,
-  signupBtn,
-} from "../../AppSx";
+import { useEffect, useState } from "react";
+import { createInput, modalStyle, signupBtn } from "../../AppSx";
 import { auth, db } from "../../credentials";
 import {
   Button,
@@ -32,12 +28,12 @@ export default function EditModal(props) {
 
   const editQuote = async () => {
     clearErrors();
-    if (!quote) {
+    if(!quote) {
       setQuoteError(true);
       setQuoteErrorText("Enter a quote");
-    } else if (!page) {
+    } else if (isNaN(page)) {
       setPageError(true);
-      setPageErrorText("Enter a page");
+      setPageErrorText("Enter a number");
     } else {
       const ref = doc(db, "QuotesDB", auth.currentUser.uid);
       let userDoc = await getDoc(ref);
@@ -61,6 +57,11 @@ export default function EditModal(props) {
     }
   };
 
+  useEffect(() => {
+    setPage(props.page);
+    setQuote(props.quote);
+  }, []);
+
   return (
     <Modal
       open={props.toggle}
@@ -80,7 +81,7 @@ export default function EditModal(props) {
           error={quoteError}
           helperText={quoteErrorText}
           sx={createInput}
-          defaultValue={props.quote}
+          defaultValue={quote}
           multiline
           rows={4}
           id="quote"
@@ -94,10 +95,10 @@ export default function EditModal(props) {
           error={pageError}
           helperText={pageErrorText}
           sx={createInput}
-          defaultValue={props.page}
+          defaultValue={page}
           id="page"
           type="number"
-          label="Page Number"
+          label="Page Number (optional)"
           variant="outlined"
           onChange={(e) => {
             setPage(e.target.value);
@@ -114,11 +115,7 @@ export default function EditModal(props) {
         >
           Update
         </Button>
-        <Button
-          sx={signupBtn}
-          variant="outlined"
-          onClick={() => props.close()}
-        >
+        <Button sx={signupBtn} variant="outlined" onClick={() => props.close()}>
           Cancel
         </Button>
       </Paper>

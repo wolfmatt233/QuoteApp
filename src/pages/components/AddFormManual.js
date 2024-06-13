@@ -76,9 +76,9 @@ export default function AddFormManual() {
     } else if (!quote) {
       setQuoteError(true);
       setQuoteErrorText("Enter a quote");
-    } else if (!page) {
+    } else if (isNaN(page)) {
       setPageError(true);
-      setPageErrorText("Enter a page number");
+      setPageErrorText("Enter a number");
     } else if (imageError == false) {
       await updateDoc(doc(db, "QuotesDB", auth.currentUser.uid), {
         quotes: arrayUnion({
@@ -181,7 +181,7 @@ export default function AddFormManual() {
       <TextField
         sx={{ mt: "15px" }}
         id="pageNum"
-        label="Page Number"
+        label="Page Number (optional)"
         variant="outlined"
         type="number"
         error={pageError}
