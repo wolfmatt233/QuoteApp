@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/QuoteApp/static/css/main.09a7134b.css",
-    "main.js": "/QuoteApp/static/js/main.451734ca.js",
+    "main.js": "/QuoteApp/static/js/main.5924700d.js",
     "static/js/453.020061ae.chunk.js": "/QuoteApp/static/js/453.020061ae.chunk.js",
     "static/media/caveat-cyrillic-wght-normal.woff2": "/QuoteApp/static/media/caveat-cyrillic-wght-normal.66d748a0b10c0701e2c4.woff2",
     "static/media/caveat-latin-wght-normal.woff2": "/QuoteApp/static/media/caveat-latin-wght-normal.566819e6881dda99ca61.woff2",
@@ -15,11 +15,11 @@
     "static/media/comfortaa-vietnamese-wght-normal.woff2": "/QuoteApp/static/media/comfortaa-vietnamese-wght-normal.654e4338a2fa1f05718b.woff2",
     "index.html": "/QuoteApp/index.html",
     "main.09a7134b.css.map": "/QuoteApp/static/css/main.09a7134b.css.map",
-    "main.451734ca.js.map": "/QuoteApp/static/js/main.451734ca.js.map",
+    "main.5924700d.js.map": "/QuoteApp/static/js/main.5924700d.js.map",
     "453.020061ae.chunk.js.map": "/QuoteApp/static/js/453.020061ae.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.09a7134b.css",
-    "static/js/main.451734ca.js"
+    "static/js/main.5924700d.js"
   ]
 }
