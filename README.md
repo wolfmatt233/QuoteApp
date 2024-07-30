@@ -1,4 +1,4 @@
-# Quotes App (in progress)
+# Quotes App
 
 [Link](https://wolfmatt233.github.io/QuoteApp/)
 
