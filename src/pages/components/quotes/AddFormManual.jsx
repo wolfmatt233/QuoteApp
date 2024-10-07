@@ -17,7 +17,7 @@ export default function AddFormManual({ setFormType }) {
   const [showMessage, setShowMessage] = useState("hidden");
 
   const saveQuote = async () => {
-    const { title, author, quote } = formData;
+    const { title, author, quote, page } = formData;
 
     if ([title, author, quote].some((field) => !field)) {
       return alert("Complete the required fields.");
@@ -71,17 +71,19 @@ export default function AddFormManual({ setFormType }) {
         name="title"
         id="title"
         className="border border-gray-300 p-1 mb-4"
+        value={formData.title}
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, title: e.target.value }))
         }
       />
 
-      <label htmlFor="title">Author</label>
+      <label htmlFor="author">Author</label>
       <input
         type="text"
         name="author"
         id="author"
         className="border border-gray-300 p-1 mb-4"
+        value={formData.author}
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, author: e.target.value }))
         }
@@ -92,6 +94,7 @@ export default function AddFormManual({ setFormType }) {
         name="quote"
         id="quote"
         className="border border-gray-300 p-1 mb-4"
+        rows={4}
         value={formData.quote}
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, quote: e.target.value }))
@@ -107,9 +110,14 @@ export default function AddFormManual({ setFormType }) {
         id="number"
         className="border border-gray-300 p-1 mb-4"
         value={formData.page}
-        onChange={(e) =>
-          setFormData((prev) => ({ ...prev, page: e.target.value }))
-        }
+        onChange={(e) => {
+          const value = e.target.value;
+          const numValue = Number(value);
+          setFormData((prev) => ({
+            ...prev,
+            page: isNaN(numValue) ? 0 : numValue,
+          }));
+        }}
       />
 
       <label htmlFor="title">
@@ -120,6 +128,7 @@ export default function AddFormManual({ setFormType }) {
         name="image"
         id="image"
         className="border border-gray-300 p-1 mb-4"
+        placeholder="Enter an image url"
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, image: e.target.value }))
         }
@@ -132,6 +141,7 @@ export default function AddFormManual({ setFormType }) {
         name="notes"
         id="notes"
         className="border border-gray-300 p-1 mb-4"
+        rows={4}
         value={formData.note}
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, note: e.target.value }))

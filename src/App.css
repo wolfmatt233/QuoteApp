@@ -150,7 +150,7 @@
 }
 
 .close-menu {
-  width: calc(100vw - 200vw);
+  width: 0;
   transition: width 0.75s;
 }
 

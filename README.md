@@ -17,7 +17,17 @@ This is a React app that is focused on cataloging your favorite quotes from book
   - Sharing options: social media, copy quote, maybe screenshot option (TODO)
   - Quotes connected to the api can view more details through a link to OpenLibrary (TODO)
 - Account:
-  - Change password, change username, delete account.
+  - Change password, change username, delete account, change password email.
 - Sign up
 - Log in
 
+# TO DO
+
+- Visual improvements
+- Responsiveness improvements
+- Home page refinement
+- Quote viewing pagination/searching
+- User change password email
+- Sharing options
+- OpenLibrary linking
+- User feedback modals/popups (SweetAlert)

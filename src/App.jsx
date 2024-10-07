@@ -14,7 +14,7 @@ import AddQuote from "./pages/AddQuote";
 import ViewQuotes from "./pages/ViewQuotes";
 
 function App() {
-  const { user, loading } = useContext(Context);
+  const { user, userDoc, loading } = useContext(Context);
   const [page, setPage] = useState(<Home />);
 
   const pages = {
@@ -59,7 +59,13 @@ function App() {
         user={user}
         logout={logout}
       />
-      <Navbar handleBurger={handleBurger} burgerToggle={burgerToggle} />
+      <Navbar
+        handleBurger={handleBurger}
+        burgerToggle={burgerToggle}
+        changePage={setPage}
+        pages={pages}
+        userDoc={userDoc}
+      />
 
       <div className="mx-auto px-11 py-7 max-w-screen-xl max-sm:px-0">
         <div className="min-h-[calc(100vh-144px)] rounded-lg bg-white border-gray-300 border-[1px] p-5 max-sm:px-2">

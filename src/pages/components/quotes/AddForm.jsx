@@ -163,6 +163,7 @@ export default function AddForm({ setFormType }) {
         name="quote"
         id="quote"
         className="border border-gray-300 p-1 mb-4"
+        rows={4}
         value={formData.quote}
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, quote: e.target.value }))
@@ -188,6 +189,7 @@ export default function AddForm({ setFormType }) {
         name="notes"
         id="notes"
         className="border border-gray-300 p-1 mb-4"
+        rows={4}
         value={formData.note}
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, note: e.target.value }))

@@ -7,6 +7,7 @@ import EditQuote from "./EditQuote";
 export default function ViewQuotes({ setPage }) {
   const { userDoc } = useContext(Context);
   const [curPage, setCurPage] = useState(userDoc.quotes);
+  const [note, setNote] = useState(null);
   const [deleteModal, setDeleteModal] = useState();
   //TODO: pagination, visuals, route to edit
 
@@ -61,15 +62,34 @@ export default function ViewQuotes({ setPage }) {
           </div>
 
           <div className="w-full">
-            <div className="flex items-baseline">
+            <div className="flex items-baseline flex-wrap">
               <p className="text-lg">{quote.title}</p>
-              &nbsp;<p>by</p>&nbsp;
-              <p>{quote.author}</p>
+              &nbsp;
+              <p>by {quote.author}</p>
             </div>
             <hr className="border-gray-400 mb-3" />
             <p>"{quote.quote}"</p>
-            <p>- Page {quote.page}</p>
-            <div>{quote.note}</div>
+            {quote.page && <p>- Page {quote.page}</p>}
+            {note === quote.id && (
+              <>
+                <hr className="border-gray-400 mt-3 mb-2" />
+                <div>{quote.note}</div>
+                <button
+                  onClick={() => setNote(null)}
+                  className="gray-button rounded-md p-1 mt-2 text-sm"
+                >
+                  Hide note
+                </button>
+              </>
+            )}
+            {quote.note && note === null && (
+              <button
+                onClick={() => setNote(quote.id)}
+                className="gray-button rounded-md p-1 mt-2 text-sm"
+              >
+                Show note
+              </button>
+            )}
           </div>
 
           {deleteModal === quote.id && (

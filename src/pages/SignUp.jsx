@@ -36,7 +36,7 @@ export default function SignUp({ setPage }) {
   };
 
   return (
-    <div className="flex flex-col max-w-sm w-1/2 border border-gray-300 rounded-md p-6 m-auto">
+    <div className="flex flex-col max-md:w-full max-w-sm w-1/2 border border-gray-300 rounded-md p-6 m-auto">
       <p className="text-center text-xl">Sign Up</p>
       <label htmlFor="uname">Username</label>
       <input

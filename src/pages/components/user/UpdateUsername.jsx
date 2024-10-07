@@ -2,23 +2,21 @@ import { useContext, useState } from "react";
 import { auth, db } from "../../../credentials";
 import Context from "../../../context/ContextProvider";
 import { doc, updateDoc } from "firebase/firestore";
-import { getUserDoc } from "../../functions/firebase-doc-functions";
 
 export default function UpdateUsername({ setUserPage }) {
-  const { userDoc, setUserDoc } = useContext(Context);
-  const [name, setName] = useState(userDoc.data().username);
+  const { userDoc } = useContext(Context);
+  const [name, setName] = useState(userDoc.username);
 
   const changeUsername = async () => {
     try {
       await updateDoc(doc(db, "QuotesDB", auth.currentUser.uid), {
         username: name,
       });
-      setUserDoc(await getUserDoc());
       setUserPage("");
       alert("Username changed successfully.");
     } catch (error) {
       alert("Error updating username.");
-      setName(userDoc.data().username);
+      setName(userDoc.username);
     }
   };
 
