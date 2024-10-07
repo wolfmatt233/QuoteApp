@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .center-position {
+    @apply absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%];
+  }
+
+  .gray-button {
+    @apply border border-gray-300 hover:bg-gray-200 rounded-xl p-2 text-gray-500;
+  }
+
+  .red-button {
+    @apply bg-red-500 hover:bg-red-400 rounded-xl p-2 text-white;
+  }
+
+  .blue-button {
+    @apply bg-blue-500 hover:bg-blue-400 rounded-xl p-2 text-white;
+  }
+
+  .basic-input {
+    @apply border border-gray-300 p-1 mb-2;
+  }
+}

@@ -1,0 +1,160 @@
+/* From Burger to X */
+
+@keyframes topburgerflip {
+  from {
+    transform: rotate(0deg);
+    top: 25%;
+  }
+  to {
+    transform: rotate(45deg);
+    top: 50%;
+  }
+}
+
+@keyframes middleburgerflip {
+  from {
+    transform: rotate(0deg);
+    opacity: 100;
+  }
+  to {
+    transform: rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes bottomburgerflip {
+  from {
+    transform: rotate(0deg);
+    top: 75%;
+  }
+  to {
+    transform: rotate(-45deg);
+    top: 50%;
+  }
+}
+
+/* X Burger */
+
+.burger-on hr:nth-child(1) {
+  transform: rotate(45deg);
+  top: 50%;
+  animation-duration: 0.6s;
+  animation-name: topburgerflip;
+}
+
+.burger-on hr:nth-child(2) {
+  transform: rotate(-45deg);
+  top: 50%;
+  opacity: 0;
+  animation-duration: 0.6s;
+  animation-name: middleburgerflip;
+}
+
+.burger-on hr:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 50%;
+  animation-duration: 0.6s;
+  animation-name: bottomburgerflip;
+}
+
+/* From X to Burger */
+
+@keyframes topburgereturn {
+  from {
+    transform: rotate(45deg);
+    top: 50%;
+  }
+  to {
+    transform: rotate(0deg);
+    top: 25%;
+  }
+}
+
+@keyframes middleburgereturn {
+  from {
+    transform: rotate(-45deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes bottomburgereturn {
+  from {
+    transform: rotate(-45deg);
+    top: 50%;
+  }
+  to {
+    transform: rotate(0deg);
+    top: 75%;
+  }
+}
+
+/* Lines Burger */
+
+.burger-off hr:nth-child(1) {
+  top: 25%;
+  animation-duration: 0.6s;
+  animation-name: topburgereturn;
+}
+
+.burger-off hr:nth-child(2) {
+  top: 50%;
+  animation-duration: 0.6s;
+  animation-name: middleburgereturn;
+}
+
+.burger-off hr:nth-child(3) {
+  top: 75%;
+  animation-duration: 0.6s;
+  animation-name: bottomburgereturn;
+}
+
+.footer-shadow {
+  box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Success message */
+.message-open {
+  visibility: visible;
+  height: 36px;
+}
+
+@keyframes to-hidden {
+  0% {
+    height: 36px;
+    visibility: visible;
+  }
+
+  25% {
+    visibility: hidden;
+  }
+
+  100% {
+    height: 0px;
+  }
+}
+
+.message-closed {
+  animation-duration: 0.6s;
+  animation-name: to-hidden;
+  visibility: hidden;
+  height: 0px;
+}
+
+/* Menu */
+
+.show-menu {
+  transition: width 0.75s;
+  width: 100vw;
+}
+
+.close-menu {
+  width: calc(100vw - 200vw);
+  transition: width 0.75s;
+}
+
+.close-menu button,
+.close-menu div {
+  visibility: hidden;
+}
