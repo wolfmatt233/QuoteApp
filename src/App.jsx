@@ -18,13 +18,14 @@ function App() {
   const [page, setPage] = useState(<Home />);
 
   const pages = {
-    home: <Home />,
+    home: <Home setPage={setPage} />,
     login: <Login setPage={setPage} />,
     signup: <SignUp setPage={setPage} />,
     user: <User />,
     add: <AddQuote />,
     view: <ViewQuotes setPage={setPage} />,
   };
+  pages.home = <Home setPage={setPage} pages={pages} />;
 
   const { menuToggle, closeMenu, burgerToggle, handleBurger } = useMenuToggle();
 
@@ -53,7 +54,7 @@ function App() {
   return (
     <div className="relative bg-gray-100">
       <Menu
-        changePage={setPage}
+        setPage={setPage}
         menuToggle={menuToggle}
         pages={pages}
         user={user}
@@ -62,7 +63,7 @@ function App() {
       <Navbar
         handleBurger={handleBurger}
         burgerToggle={burgerToggle}
-        changePage={setPage}
+        setPage={setPage}
         pages={pages}
         userDoc={userDoc}
       />

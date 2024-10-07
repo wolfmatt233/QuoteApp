@@ -1,7 +1,7 @@
 export default function Navbar({
   handleBurger,
   burgerToggle,
-  changePage,
+  setPage,
   pages,
   userDoc,
 }) {
@@ -22,7 +22,7 @@ export default function Navbar({
         </div>
         {userDoc && (
           <div
-            onClick={() => changePage(pages.user)}
+            onClick={() => setPage(pages.user)}
             className="hover:cursor-pointer absolute top-1 right-11 flex items-center"
           >
             <p className="max-md:hidden">{userDoc.username}</p>

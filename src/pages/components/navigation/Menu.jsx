@@ -1,11 +1,11 @@
-export default function Menu({ changePage, menuToggle, pages, user, logout }) {
+export default function Menu({ setPage, menuToggle, pages, user, logout }) {
   return (
     <div
       className={`absolute top-0 h-full bg-white border text-center flex flex-col ${menuToggle} z-10`}
     >
       <div className="text-xl h-12 border-b flex items-center justify-center"></div>
       <button
-        onClick={() => changePage(pages.home)}
+        onClick={() => setPage(pages.home)}
         className="text-xl h-12 border-b flex items-center justify-center hover:bg-gray-100"
       >
         <i className="fa-solid fa-house mr-3"></i>
@@ -14,14 +14,14 @@ export default function Menu({ changePage, menuToggle, pages, user, logout }) {
       {user ? (
         <>
           <button
-            onClick={() => changePage(pages.view)}
+            onClick={() => setPage(pages.view)}
             className="text-xl h-12 border-b flex items-center justify-center hover:bg-gray-100"
           >
             <i className="fa-solid fa-pen-nib mr-3"></i>
             Quotes
           </button>
           <button
-            onClick={() => changePage(pages.add)}
+            onClick={() => setPage(pages.add)}
             className="text-xl h-12 border-b flex items-center justify-center hover:bg-gray-100"
           >
             <i className="fa-solid fa-plus mr-3"></i>
@@ -38,15 +38,17 @@ export default function Menu({ changePage, menuToggle, pages, user, logout }) {
       ) : (
         <>
           <button
-            onClick={() => changePage(pages.login)}
+            onClick={() => setPage(pages.login)}
             className="text-xl h-12 border-b flex items-center justify-center hover:bg-gray-100"
           >
+            <i className="fa-solid fa-right-to-bracket mr-3"></i>
             Log In
           </button>
           <button
-            onClick={() => changePage(pages.signup)}
+            onClick={() => setPage(pages.signup)}
             className="text-xl h-12 border-b flex items-center justify-center hover:bg-gray-100"
           >
+            <i className="fa-solid fa-user-plus mr-3"></i>
             Sign Up
           </button>
         </>

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import Context from "../context/ContextProvider";
 
-export default function Home({ changePage, pages }) {
+export default function Home({ setPage, pages }) {
   const { user } = useContext(Context);
 
   return (
@@ -22,7 +22,7 @@ export default function Home({ changePage, pages }) {
             <li className="list-disc ml-6">
               <button
                 className="text-blue-600 hover:underline"
-                onClick={() => changePage(pages.user)}
+                onClick={() => setPage(pages.user)}
               >
                 Account
               </button>
@@ -30,7 +30,7 @@ export default function Home({ changePage, pages }) {
             <li className="list-disc ml-6">
               <button
                 className="text-blue-600 hover:underline"
-                onClick={() => changePage(pages.view)}
+                onClick={() => setPage(pages.view)}
               >
                 Quotes
               </button>
@@ -38,7 +38,7 @@ export default function Home({ changePage, pages }) {
             <li className="list-disc ml-6">
               <button
                 className="text-blue-600 hover:underline"
-                onClick={() => changePage(pages.add)}
+                onClick={() => setPage(pages.add)}
               >
                 Add a Quote
               </button>
@@ -52,6 +52,3 @@ export default function Home({ changePage, pages }) {
     </>
   );
 }
-// user: <User />,
-//     add: <AddQuote />,
-//     view: <ViewQuotes setPage={setPage} />
