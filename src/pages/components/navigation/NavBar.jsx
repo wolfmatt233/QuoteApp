@@ -3,13 +3,18 @@ export default function Navbar({
   burgerToggle,
   setPage,
   pages,
+  page,
   userDoc,
+  logout,
 }) {
   return (
     <div className="shadow-md bg-white">
-      <nav className="px-11 h-12 items-center justify-center flex m-auto max-w-screen-xl relative max-sm:px-2">
-        <div className="flex hover:cursor-pointer" onClick={() => changePage(pages.home)}>
-          <img src="./book.svg" alt="book-svg" className="w-8 mt-[1px]" />
+      <nav className="px-11 h-[50px] items-center justify-center flex m-auto max-w-screen-xl relative max-sm:px-2">
+        <div
+          className="flex hover:cursor-pointer items-center justify-center"
+          onClick={() => setPage(pages.home)}
+        >
+          <i className="fa-solid fa-book mr-1 mt-1"></i>
           <p className="text-xl">QuoteScribe</p>
         </div>
         <div
@@ -21,19 +26,32 @@ export default function Navbar({
           <hr className="border-black absolute top-3/4 w-full" />
         </div>
         {userDoc && (
-          <div
-            onClick={() => setPage(pages.user)}
-            className="hover:cursor-pointer absolute top-1 right-11 flex items-center"
-          >
-            <p className="max-md:hidden">{userDoc.username}</p>
+          <div className="absolute top-[7px] right-11 max-sm:right-2 flex items-center">
             <div
-              className={`ml-2 flex items-center justify-center rounded-full border w-9 h-9 border-black hover:cursor-pointer  max-sm:right-2 z-20 ${burgerToggle}`}
+              onClick={() => setPage(pages.user)}
+              className="cursor-pointer max-sm:right-2 flex items-center group"
             >
-              <i className="fa-solid fa-user text-xl"></i>
+              <p className="max-md:hidden whitespace-nowrap text-sm text-ellipsis max-w-40 overflow-hidden">
+                Welcome, {userDoc.username}!
+              </p>
+              <div
+                className={`ml-2 flex items-center justify-center rounded-full w-9 h-9 bg-blue-400 max-sm:right-2 z-20 group-hover:bg-blue-500 ${burgerToggle}`}
+              >
+                <i className="fa-solid fa-user text-xl text-white"></i>
+              </div>
+            </div>
+            <div className="text-white bg-blue-400 w-9 h-9 rounded-md flex items-center justify-evenly hover:bg-blue-500 cursor-pointer ml-2 z-20" onClick={logout}>
+              <i className="fa-solid fa-right-from-bracket text-xl hover:cursor-pointer text-white"></i>
             </div>
           </div>
         )}
       </nav>
+      <hr />
+      <div className="px-11 m-auto max-w-screen-xl relative max-sm:px-2">
+        <div className="bg-white w-full py-4">
+          <p className="text-xl">{page.title}</p>
+        </div>
+      </div>
     </div>
   );
 }

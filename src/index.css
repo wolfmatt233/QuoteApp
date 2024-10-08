@@ -22,4 +22,8 @@
   .basic-input {
     @apply border border-gray-300 p-1 mb-2;
   }
+
+  .menu-button {
+    @apply text-xl h-12 border-b flex items-center justify-center hover:bg-blue-400 hover:text-white;
+  }
 }

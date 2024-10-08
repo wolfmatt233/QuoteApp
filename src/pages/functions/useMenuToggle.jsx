@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function useMenuToggle() {
   const [menuToggle, setMenuToggle] = useState("close-menu");

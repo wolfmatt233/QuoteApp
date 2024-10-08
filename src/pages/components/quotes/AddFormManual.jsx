@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { auth, db } from "../../../credentials";
 import AddForm from "./AddForm";
 
-export default function AddFormManual({ setFormType }) {
-  const [query, setQuery] = useState("");
+export default function AddFormManual({ setFormType, setPage, pages }) {
   const [formData, setFormData] = useState({
     id: crypto.randomUUID(),
     author: "",
@@ -16,16 +15,36 @@ export default function AddFormManual({ setFormType }) {
   });
   const [showMessage, setShowMessage] = useState("hidden");
 
+  const checkImageUrl = (url) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = url;
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+    });
+  };
+
   const saveQuote = async () => {
-    const { title, author, quote, page } = formData;
+    const { title, author, quote } = formData;
 
     if ([title, author, quote].some((field) => !field)) {
       return alert("Complete the required fields.");
     }
 
+    const imageCheck = await checkImageUrl(formData.image);
+
+    const updatedFormData = {
+      ...formData,
+      image: imageCheck ? formData.image : "",
+    };
+
+    if (imageCheck === false) {
+      setFormData((prev) => ({ ...prev, image: "" }));
+    }
+
     try {
       await updateDoc(doc(db, "QuotesDB", auth.currentUser.uid), {
-        quotes: arrayUnion(formData),
+        quotes: arrayUnion(updatedFormData),
       });
 
       setFormData({
@@ -37,7 +56,6 @@ export default function AddFormManual({ setFormType }) {
         note: "",
         page: "",
       });
-      setQuery("");
       setShowMessage("");
     } catch (error) {
       alert(error.message.split(" (")[0].replace("Firebase: ", ""));
@@ -46,23 +64,35 @@ export default function AddFormManual({ setFormType }) {
 
   return (
     <>
-      <p className="text-xl mb-2">Add a Quote</p>
-      <hr className="mb-2" />
-
       <div
         className={`${showMessage} bg-green-500 flex items-center justify-between my-1 rounded-sm p-2 text-white`}
       >
         <p>Success!</p>
         <button onClick={() => setShowMessage("hidden")}>
-          <i className="fa-regular fa-circle-xmark hover:text-red-600"></i>
+          <i className="fa-regular fa-circle-xmark hover:text-red-400"></i>
         </button>
       </div>
+      <button
+        className={`${showMessage} blue-button my-3`}
+        onClick={() => setPage(pages.view)}
+      >
+        View your new quote!
+      </button>
 
       <button
         className="border-b border-b-transparent hover:border-blue-500 text-blue-500 mb-3 self-start inline-flex items-center"
-        onClick={() => setFormType(<AddForm setFormType={setFormType} />)}
+        onClick={() =>
+          setFormType(
+            <AddForm
+              setFormType={setFormType}
+              setPage={setPage}
+              pages={pages}
+            />
+          )
+        }
       >
-        <i className="fa-solid fa-arrow-left mr-2"></i> Go back.
+        <i className="fa-solid fa-arrow-left mr-1 mt-1"></i> Back to automatic
+        mode.
       </button>
 
       <label htmlFor="title">Title</label>
@@ -106,8 +136,8 @@ export default function AddFormManual({ setFormType }) {
       </label>
       <input
         type="number"
-        name="number"
-        id="number"
+        name="page"
+        id="page"
         className="border border-gray-300 p-1 mb-4"
         value={formData.page}
         onChange={(e) => {
@@ -120,7 +150,7 @@ export default function AddFormManual({ setFormType }) {
         }}
       />
 
-      <label htmlFor="title">
+      <label htmlFor="image">
         Image <span className="text-gray-400 text-sm">(optional)</span>
       </label>
       <input
@@ -129,6 +159,7 @@ export default function AddFormManual({ setFormType }) {
         id="image"
         className="border border-gray-300 p-1 mb-4"
         placeholder="Enter an image url"
+        value={formData.image}
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, image: e.target.value }))
         }

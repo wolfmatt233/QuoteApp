@@ -1,10 +1,11 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { auth, db } from "../credentials";
 import { doc, setDoc } from "firebase/firestore";
-import Login from "./Login";
+import { PageContext } from "../App";
 
-export default function SignUp({ setPage }) {
+export default function SignUp() {
+  const { setPage, pages } = useContext(PageContext);
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -62,15 +63,12 @@ export default function SignUp({ setPage }) {
         className="basic-input"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button
-        className="blue-button my-3"
-        onClick={createAccount}
-      >
+      <button className="blue-button my-3" onClick={createAccount}>
         Sign Up
       </button>
       <button
         className="hover:underline text-blue-500 mt-1"
-        onClick={() => setPage(<Login setPage={setPage} />)}
+        onClick={() => setPage(pages.login)}
       >
         Already have an account? Log in here!
       </button>

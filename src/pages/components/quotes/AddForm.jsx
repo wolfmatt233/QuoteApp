@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { auth, db } from "../../../credentials";
 import AddFormManual from "./AddFormManual";
 
-export default function AddForm({ setFormType }) {
+export default function AddForm({ setFormType, setPage, pages }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [formData, setFormData] = useState({
@@ -35,10 +35,17 @@ export default function AddForm({ setFormType }) {
     if (query.length > 1) {
       setLoading(true);
       const fetchData = async () => {
-        const resultsData = await fetchApi(query);
-        setResults(resultsData);
-        setShowDropdown(true);
-        setLoading(false);
+        try {
+          const resultsData = await fetchApi(query);
+          setResults(resultsData);
+          setShowDropdown(true);
+          setLoading(false);
+        } catch (error) {
+          alert("Error getting data, try adding your quote manually.");
+          setLoading(false);
+          setResults([]);
+          setShowDropdown(false);
+        }
       };
       fetchData();
     } else {
@@ -51,7 +58,7 @@ export default function AddForm({ setFormType }) {
     const newData = {
       author: book.author_name[0],
       title: book.title,
-      image: `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`,
+      image: `https://covers.openlibrary.org/b/id/${book.cover_i}-S.jpg`,
     };
     setQuery(`Selected: ${book.title} by ${book.author_name[0]}`);
     setFormData((prev) => ({ ...prev, ...newData }));
@@ -87,17 +94,21 @@ export default function AddForm({ setFormType }) {
 
   return (
     <>
-      <p className="text-xl mb-2">Add a Quote</p>
-      <hr className="mb-2" />
-
       <div
         className={`${showMessage} bg-green-500 flex items-center justify-between my-1 rounded-sm p-2 text-white`}
       >
         <p>Success!</p>
         <button onClick={() => setShowMessage("hidden")}>
-          <i className="fa-regular fa-circle-xmark hover:text-red-600"></i>
+          <i className="fa-regular fa-circle-xmark hover:text-red-400"></i>
         </button>
       </div>
+
+      <button
+        className={`${showMessage} blue-button my-3`}
+        onClick={() => setPage(pages.view)}
+      >
+        View your new quote!
+      </button>
 
       <label htmlFor="book">Book</label>
       <input
@@ -121,13 +132,21 @@ export default function AddForm({ setFormType }) {
           onClick={search}
           className="mb-2 border border-gray-200 hover:bg-gray-200 rounded-md p-1 text-gray-500"
         >
-          Search
+          <i className="fa-solid fa-magnifying-glass"></i> Search
         </button>
       )}
 
       <button
         className="hover:underline text-blue-500 flex mb-3"
-        onClick={() => setFormType(<AddFormManual setFormType={setFormType} />)}
+        onClick={() =>
+          setFormType(
+            <AddFormManual
+              setFormType={setFormType}
+              setPage={setPage}
+              pages={pages}
+            />
+          )
+        }
       >
         Can't find your book? Create a quote manually!
       </button>
@@ -169,6 +188,7 @@ export default function AddForm({ setFormType }) {
           setFormData((prev) => ({ ...prev, quote: e.target.value }))
         }
       ></textarea>
+
       <label htmlFor="page">
         Page <span className="text-gray-400 text-sm">(optional)</span>
       </label>
@@ -182,6 +202,7 @@ export default function AddForm({ setFormType }) {
           setFormData((prev) => ({ ...prev, page: e.target.value }))
         }
       />
+
       <label htmlFor="notes">
         Notes <span className="text-gray-400 text-sm">(optional)</span>
       </label>
@@ -195,6 +216,7 @@ export default function AddForm({ setFormType }) {
           setFormData((prev) => ({ ...prev, note: e.target.value }))
         }
       ></textarea>
+      
       <button
         onClick={saveQuote}
         className="bg-blue-500 hover:bg-blue-400 rounded-xl p-2 text-white"

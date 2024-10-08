@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, createContext } from "react";
 import "./App.css";
 import Home from "./pages/Home";
 import Navbar from "./pages/components/navigation/NavBar";
@@ -13,19 +13,20 @@ import Context from "./context/ContextProvider";
 import AddQuote from "./pages/AddQuote";
 import ViewQuotes from "./pages/ViewQuotes";
 
+export const PageContext = createContext();
+
 function App() {
   const { user, userDoc, loading } = useContext(Context);
-  const [page, setPage] = useState(<Home />);
+  const [page, setPage] = useState("");
 
   const pages = {
-    home: <Home setPage={setPage} />,
-    login: <Login setPage={setPage} />,
-    signup: <SignUp setPage={setPage} />,
-    user: <User />,
-    add: <AddQuote />,
-    view: <ViewQuotes setPage={setPage} />,
+    home: { component: <Home />, title: "Home" },
+    login: { component: <Login />, title: "Log In" },
+    signup: { component: <SignUp />, title: "SignUp" },
+    user: { component: <User />, title: "Your Account" },
+    add: { component: <AddQuote />, title: "Add a Quote" },
+    view: { component: <ViewQuotes />, title: "Quotes" },
   };
-  pages.home = <Home setPage={setPage} pages={pages} />;
 
   const { menuToggle, closeMenu, burgerToggle, handleBurger } = useMenuToggle();
 
@@ -37,11 +38,12 @@ function App() {
     closeMenu();
   }, [page]);
 
-  const logout = () => {
+  const logout = async () => {
     try {
-      signOut(auth);
+      await signOut(auth);
+      setPage(pages.home);
     } catch (error) {
-      console.log(error);
+      alert("There was an error signing you out.");
     }
   };
 
@@ -52,40 +54,51 @@ function App() {
   }
 
   return (
-    <div className="relative bg-gray-100">
-      <Menu
-        setPage={setPage}
-        menuToggle={menuToggle}
-        pages={pages}
-        user={user}
-        logout={logout}
-      />
-      <Navbar
-        handleBurger={handleBurger}
-        burgerToggle={burgerToggle}
-        setPage={setPage}
-        pages={pages}
-        userDoc={userDoc}
-      />
+    <PageContext.Provider value={{ setPage, pages }}>
+      <div className="relative bg-gray-100">
+        <Menu
+          setPage={setPage}
+          menuToggle={menuToggle}
+          pages={pages}
+          user={user}
+          logout={logout}
+          page={page}
+        />
+        <Navbar
+          handleBurger={handleBurger}
+          burgerToggle={burgerToggle}
+          setPage={setPage}
+          pages={pages}
+          page={page}
+          userDoc={userDoc}
+          logout={logout}
+        />
 
-      <div className="mx-auto px-11 py-7 max-w-screen-xl max-sm:px-0">
-        <div className="min-h-[calc(100vh-144px)] rounded-lg bg-white border-gray-300 border-[1px] p-5 max-sm:px-2">
-          {page}
+        <div className="mx-auto px-11 py-10 max-w-screen-xl max-sm:px-0">
+          <div className="min-h-[calc(100vh-231px)] rounded-lg bg-white border-gray-300 border-[1px] p-5 max-sm:px-2 max-sm:rounded-none">
+            {page.component}
+          </div>
+        </div>
+
+        <div className="footer-shadow">
+          <footer className="text-center m-auto max-w-screen-xl h-10 flex items-center justify-around">
+            <p>Matthew Wolf</p>
+            <a
+              className="underline text-blue-500 hover:text-blue-400"
+              href="https://github.com/wolfmatt233"
+            >
+              GitHub
+            </a>
+            <a
+              className="underline text-blue-500 hover:text-blue-400"
+              href="www.linkedin.com/in/matthew-wolf2"
+            >
+              LinkedIn
+            </a>
+          </footer>
         </div>
       </div>
-
-      <div className="footer-shadow">
-        <footer className="text-center m-auto max-w-screen-xl h-10 flex items-center justify-around">
-          <p>&copy;Matthew Wolf</p>
-          <a className="underline" href="https://github.com/wolfmatt233">
-            GitHub
-          </a>
-          <a className="underline" href="www.linkedin.com/in/matthew-wolf2">
-            LinkedIn
-          </a>
-        </footer>
-      </div>
-    </div>
+    </PageContext.Provider>
   );
 }
 

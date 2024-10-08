@@ -1,12 +1,12 @@
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import { useContext, useEffect, useState } from "react";
+import { doc, updateDoc } from "firebase/firestore";
+import { useContext, useState } from "react";
 import { auth, db } from "../credentials";
 import Context from "../context/ContextProvider";
-import ViewQuotes from "./ViewQuotes";
+import { PageContext } from "../App";
 
-export default function EditQuote({ quote, setPage }) {
+export default function EditQuote({ quote }) {
   const { userDoc } = useContext(Context);
-  const [query, setQuery] = useState("");
+  const { setPage, pages } = useContext(PageContext);
   const [formData, setFormData] = useState({
     id: quote.id,
     author: quote.author,
@@ -17,19 +17,41 @@ export default function EditQuote({ quote, setPage }) {
     note: quote.note,
   });
 
+  const checkImageUrl = (url) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = url;
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+    });
+  };
+
   const updateQuote = async () => {
-    const { title, author, quote, page } = formData;
+    const { title, author, quote } = formData;
 
     if ([title, author, quote].some((field) => !field)) {
       return alert("Complete the required fields.");
     }
+
+    const imageCheck = await checkImageUrl(formData.image);
+
+    const updatedFormData = {
+      ...formData,
+      image: imageCheck ? formData.image : "",
+    };
+
+    if (imageCheck === false) {
+      setFormData((prev) => ({ ...prev, image: "" }));
+    }
+
+    console.log(imageCheck, updatedFormData.image);
 
     try {
       const newQuotes = userDoc.quotes.map((quote) =>
         quote.id === formData.id
           ? {
               ...quote,
-              ...formData,
+              ...updatedFormData,
             }
           : quote
       );
@@ -47,7 +69,7 @@ export default function EditQuote({ quote, setPage }) {
         page: "",
       });
 
-      setPage(<ViewQuotes setPage={setPage} />);
+      setPage(pages.view);
     } catch (error) {
       alert(error.message.split(" (")[0].replace("Firebase: ", ""));
     }
@@ -55,9 +77,6 @@ export default function EditQuote({ quote, setPage }) {
 
   return (
     <div className="flex flex-col">
-      <p className="text-xl mb-2">Edit Quote</p>
-      <hr className="mb-2" />
-
       <label htmlFor="title">Title</label>
       <input
         type="text"
