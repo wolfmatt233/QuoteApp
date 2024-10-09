@@ -5,7 +5,6 @@ import { PageContext } from "../App";
 
 export default function AddQuote() {
   const [formType, setFormType] = useState();
-  const { userDoc, setUserDoc } = useContext(Context);
   const { setPage, pages } = useContext(PageContext);
 
   useEffect(() => {

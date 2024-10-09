@@ -160,7 +160,7 @@ export default function AddForm({ setFormType, setPage, pages }) {
               onClick={() => selectBook(item)}
             >
               <img
-                src={item.volumeInfo.imageLinks.smallThumbnail || "/no-cover.gif"}
+                src={item.volumeInfo.imageLinks?.smallThumbnail || "./no-cover.gif"}
                 className="mr-3 h-20"
               />
 
