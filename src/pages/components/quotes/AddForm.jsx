@@ -1,6 +1,6 @@
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { auth, db } from "../../../credentials";
+import { auth, db, liveKey } from "../../../credentials";
 import AddFormManual from "./AddFormManual";
 
 export default function AddForm({ setFormType, setPage, pages }) {
@@ -25,10 +25,10 @@ export default function AddForm({ setFormType, setPage, pages }) {
 
   const fetchApi = async (query) => {
     const response = await fetch(
-      `https://openlibrary.org/search.json?q=${query}`
+      `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${liveKey}`
     );
     const data = await response.json();
-    return data.docs;
+    return data.items;
   };
 
   const search = async () => {
@@ -56,11 +56,11 @@ export default function AddForm({ setFormType, setPage, pages }) {
 
   const selectBook = (book) => {
     const newData = {
-      author: book.author_name[0],
-      title: book.title,
-      image: `https://covers.openlibrary.org/b/id/${book.cover_i}-S.jpg`,
+      author: book.volumeInfo.authors[0],
+      title: book.volumeInfo.title,
+      image: book.volumeInfo.imageLinks.thumbnail,
     };
-    setQuery(`Selected: ${book.title} by ${book.author_name[0]}`);
+    setQuery(`Selected: ${book.volumeInfo.title} by ${book.volumeInfo.authors[0]}`);
     setFormData((prev) => ({ ...prev, ...newData }));
   };
 
@@ -159,19 +159,12 @@ export default function AddForm({ setFormType, setPage, pages }) {
               className="hover:bg-gray-100 flex items-center"
               onClick={() => selectBook(item)}
             >
-              {item.cover_i === undefined ? (
-                <img
-                  src={`https://svgcollections.com/wp-content/uploads/2024/06/closed_book_IZlBz.png`}
-                  className="mr-3 max-h-[50px]"
-                />
-              ) : (
-                <img
-                  src={`https://covers.openlibrary.org/b/id/${item.cover_i}-S.jpg`}
-                  className="mr-3"
-                />
-              )}
+              <img
+                src={item.volumeInfo.imageLinks.smallThumbnail || "/no-cover.gif"}
+                className="mr-3 h-20"
+              />
 
-              {item.title}
+              {item.volumeInfo.title}
             </button>
           ))}
         </div>
@@ -216,7 +209,7 @@ export default function AddForm({ setFormType, setPage, pages }) {
           setFormData((prev) => ({ ...prev, note: e.target.value }))
         }
       ></textarea>
-      
+
       <button
         onClick={saveQuote}
         className="bg-blue-500 hover:bg-blue-400 rounded-xl p-2 text-white"
