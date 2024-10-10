@@ -35,13 +35,16 @@ export default function Navbar({
                 Welcome, {userDoc.username}!
               </p>
               <div
-                className={`ml-2 flex items-center justify-center rounded-full w-9 h-9 bg-blue-400 max-sm:right-2 z-20 group-hover:bg-blue-500 ${burgerToggle}`}
+                className={`ml-2 flex items-center justify-center rounded-full w-9 h-9  group-hover:bg-blue-400 ${burgerToggle}`}
               >
-                <i className="fa-solid fa-user text-xl text-white"></i>
+                <i className="fa-solid fa-user text-xl text-black group-hover:text-white"></i>
               </div>
             </div>
-            <div className="text-white bg-blue-400 w-9 h-9 rounded-md flex items-center justify-evenly hover:bg-blue-500 cursor-pointer ml-2 z-20" onClick={logout}>
-              <i className="fa-solid fa-right-from-bracket text-xl hover:cursor-pointer text-white"></i>
+            <div
+              className="text-white w-9 h-9 rounded-md flex items-center justify-evenly hover:bg-blue-400  cursor-pointer ml-2 z-20 group"
+              onClick={logout}
+            >
+              <i className="fa-solid fa-right-from-bracket text-xl hover:cursor-pointer text-black group-hover:text-white"></i>
             </div>
           </div>
         )}

@@ -1,9 +1,7 @@
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { auth, db } from "../../../credentials";
+import { useState } from "react";
 import AddForm from "./AddForm";
 
-export default function AddFormManual({ setFormType, setPage, pages }) {
+export default function AddFormManual({ setFormType, saveQuote }) {
   const [formData, setFormData] = useState({
     id: crypto.randomUUID(),
     author: "",
@@ -13,81 +11,14 @@ export default function AddFormManual({ setFormType, setPage, pages }) {
     page: "",
     note: "",
   });
-  const [showMessage, setShowMessage] = useState("hidden");
-
-  const checkImageUrl = (url) => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.src = url;
-      img.onload = () => resolve(true);
-      img.onerror = () => resolve(false);
-    });
-  };
-
-  const saveQuote = async () => {
-    const { title, author, quote } = formData;
-
-    if ([title, author, quote].some((field) => !field)) {
-      return alert("Complete the required fields.");
-    }
-
-    const imageCheck = await checkImageUrl(formData.image);
-
-    const updatedFormData = {
-      ...formData,
-      image: imageCheck ? formData.image : "",
-    };
-
-    if (imageCheck === false) {
-      setFormData((prev) => ({ ...prev, image: "" }));
-    }
-
-    try {
-      await updateDoc(doc(db, "QuotesDB", auth.currentUser.uid), {
-        quotes: arrayUnion(updatedFormData),
-      });
-
-      setFormData({
-        id: crypto.randomUUID(),
-        title: "",
-        author: "",
-        image: "",
-        quote: "",
-        note: "",
-        page: "",
-      });
-      setShowMessage("");
-    } catch (error) {
-      alert(error.message.split(" (")[0].replace("Firebase: ", ""));
-    }
-  };
 
   return (
     <>
-      <div
-        className={`${showMessage} bg-green-500 flex items-center justify-between my-1 rounded-sm p-2 text-white`}
-      >
-        <p>Success!</p>
-        <button onClick={() => setShowMessage("hidden")}>
-          <i className="fa-regular fa-circle-xmark hover:text-red-400"></i>
-        </button>
-      </div>
-      <button
-        className={`${showMessage} blue-button my-3`}
-        onClick={() => setPage(pages.view)}
-      >
-        View your new quote!
-      </button>
-
       <button
         className="border-b border-b-transparent hover:border-blue-500 text-blue-500 mb-3 self-start inline-flex items-center"
         onClick={() =>
           setFormType(
-            <AddForm
-              setFormType={setFormType}
-              setPage={setPage}
-              pages={pages}
-            />
+            <AddForm setFormType={setFormType} saveQuote={saveQuote} />
           )
         }
       >
@@ -180,7 +111,7 @@ export default function AddFormManual({ setFormType, setPage, pages }) {
       ></textarea>
 
       <button
-        onClick={saveQuote}
+        onClick={() => saveQuote(true, formData, setFormData)}
         className="bg-blue-500 hover:bg-blue-400 rounded-xl p-2 text-white"
       >
         Create

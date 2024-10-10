@@ -1,5 +1,5 @@
 import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../../../credentials";
+import { auth } from "../../credentials";
 import { useState } from "react";
 
 export default function ForgotPassword({ setToggleForgot }) {

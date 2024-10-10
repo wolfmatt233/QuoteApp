@@ -1,8 +1,8 @@
 import { useState } from "react";
-import UpdatePassword from "./components/user/UpdatePassword";
-import DeleteAccount from "./components/user/DeleteAccount";
-import UpdateUsername from "./components/user/UpdateUsername";
-import ForgotPassword from "./components/user/ForgotPassword";
+import UpdatePassword from "../features/user/UpdatePassword";
+import DeleteAccount from "../features/user/DeleteAccount";
+import UpdateUsername from "../features/user/UpdateUsername";
+import ForgotPassword from "../features/user/ForgotPassword";
 
 export default function User() {
   const [userPage, setUserPage] = useState("");

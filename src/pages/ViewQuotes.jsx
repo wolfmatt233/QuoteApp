@@ -1,18 +1,16 @@
 import { useContext, useEffect, useState } from "react";
+import Pagination from "../features/quotes/view/Pagination";
+import QuoteCard from "../features/quotes/view/QuoteCard";
 import Context from "../context/ContextProvider";
-import Pagination from "./components/quotes/Pagination";
-import DeleteModal from "./components/quotes/DeleteModal";
 import { PageContext } from "../App";
-import BookImage from "./components/quotes/BookImage";
 
-export default function ViewQuotes() {
+export default function ViewQuotes({ page, id }) {
   const { userDoc } = useContext(Context);
   const { setPage, pages } = useContext(PageContext);
-  const [curPage, setCurPage] = useState(0);
+  const [curPage, setCurPage] = useState(page);
   const [curItems, setCurItems] = useState([]);
+  const [scrollCounter, setScrollCounter] = useState(false);
   const maxPages = Math.ceil(userDoc.quotes.length / 10);
-  const [note, setNote] = useState(null);
-  const [deleteModal, setDeleteModal] = useState();
 
   useEffect(() => {
     const firstItem = curPage === 0 ? curPage : curPage * 10;
@@ -20,6 +18,26 @@ export default function ViewQuotes() {
     const curQuotes = userDoc.quotes.slice(firstItem, lastItem);
     setCurItems(curQuotes);
   }, [curPage, userDoc]);
+
+  useEffect(() => {
+    if (scrollCounter === false && id && curItems.length > 0) {
+      const element = document.getElementById(
+        id == "last" ? curItems.length - 1 : id - 1
+      );
+
+      //scroll to and focus on an element (last if coming from add, previous if coming from edit)
+      const focus = setTimeout(() => {
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+
+      return () => {
+        clearTimeout(focus);
+        setScrollCounter(true);
+      };
+    }
+  }, [id, curItems, scrollCounter]);
 
   return (
     <>
@@ -31,7 +49,7 @@ export default function ViewQuotes() {
         />
       )}
 
-      {userDoc.quotes.length === 0 && (
+      {userDoc.quotes.length === 0 ? (
         <>
           <p className="text-center text-lg mb-2">
             No quotes here yet, add some!
@@ -43,59 +61,18 @@ export default function ViewQuotes() {
             Add a quote!
           </button>
         </>
-      )}
-
-      {curItems.map((quote) => (
-        <div
-          key={quote.id}
-          className="border border-gray-300 p-3 mb-3 flex relative"
-        >
-          <BookImage
-            quote={quote}
-            setPage={setPage}
-            setDeleteModal={setDeleteModal}
-          />
-
-          <div className="w-full">
-            <div className="flex items-baseline flex-wrap">
-              <p className="text-lg">{quote.title}</p>
-              &nbsp;
-              <p>by {quote.author}</p>
-            </div>
-            <hr className="border-gray-400 mb-3" />
-            <p>"{quote.quote}"</p>
-            {quote.page && <p>- Page {quote.page}</p>}
-            {note === quote.id && (
-              <>
-                <hr className="border-gray-400 mt-3 mb-2" />
-                <div>{quote.note}</div>
-                <button
-                  onClick={() => setNote(null)}
-                  className="gray-button rounded-md p-1 mt-2 text-sm"
-                >
-                  Hide note
-                </button>
-              </>
-            )}
-            {quote.note && note === null && (
-              <button
-                onClick={() => setNote(quote.id)}
-                className="gray-button rounded-md p-1 mt-2 text-sm"
-              >
-                Show note
-              </button>
-            )}
-          </div>
-
-          <DeleteModal
-            deleteModal={deleteModal}
-            setDeleteModal={setDeleteModal}
+      ) : (
+        curItems.map((quote, idx) => (
+          <QuoteCard
+            key={quote.id}
+            id={idx}
             quote={quote}
             userDoc={userDoc}
             setCurPage={setCurPage}
+            curPage={curPage}
           />
-        </div>
-      ))}
+        ))
+      )}
 
       {userDoc.quotes.length > 0 && (
         <Pagination

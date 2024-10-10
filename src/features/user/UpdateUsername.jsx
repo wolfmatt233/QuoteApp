@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import { auth, db } from "../../../credentials";
-import Context from "../../../context/ContextProvider";
+import { auth, db } from "../../credentials";
+import Context from "../../context/ContextProvider";
 import { doc, updateDoc } from "firebase/firestore";
 
 export default function UpdateUsername({ setUserPage }) {

@@ -10,9 +10,9 @@ export default function SignUp() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const createAccount = () => {
+  const createAccount = async () => {
     try {
-      createUserWithEmailAndPassword(auth, email, password).then(
+      await createUserWithEmailAndPassword(auth, email, password).then(
         (credential) => {
           let userDoc = {
             uid: credential.user.uid,
@@ -24,7 +24,7 @@ export default function SignUp() {
         }
       );
     } catch (error) {
-      console.log(error);
+      alert(error.message.split(" (")[0].replace("Firebase: ", ""));
     }
   };
 

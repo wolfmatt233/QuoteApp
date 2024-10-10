@@ -3,8 +3,9 @@ import { useContext, useState } from "react";
 import { auth, db } from "../credentials";
 import Context from "../context/ContextProvider";
 import { PageContext } from "../App";
+import ViewQuotes from "./ViewQuotes";
 
-export default function EditQuote({ quote }) {
+export default function EditQuote({ quote, curPage, id }) {
   const { userDoc } = useContext(Context);
   const { setPage, pages } = useContext(PageContext);
   const [formData, setFormData] = useState({
@@ -44,8 +45,6 @@ export default function EditQuote({ quote }) {
       setFormData((prev) => ({ ...prev, image: "" }));
     }
 
-    console.log(imageCheck, updatedFormData.image);
-
     try {
       const newQuotes = userDoc.quotes.map((quote) =>
         quote.id === formData.id
@@ -69,7 +68,12 @@ export default function EditQuote({ quote }) {
         page: "",
       });
 
-      setPage(pages.view);
+      const maxPage = Math.ceil(newQuotes.length / 10) - 1;
+
+      setPage({
+        component: <ViewQuotes page={maxPage} id={id} />,
+        title: "Quotes",
+      });
     } catch (error) {
       alert(error.message.split(" (")[0].replace("Firebase: ", ""));
     }
@@ -77,6 +81,18 @@ export default function EditQuote({ quote }) {
 
   return (
     <div className="flex flex-col">
+      <button
+        onClick={() => {
+          setPage({
+            component: <ViewQuotes page={curPage} id={id} />,
+            title: "Quotes",
+          });
+        }}
+        className="border-b border-b-transparent hover:border-blue-500 text-blue-500 mb-3 self-start inline-flex items-center"
+      >
+        <i className="fa-solid fa-arrow-left mr-1 mt-1"></i> Back to Quotes.
+      </button>
+
       <label htmlFor="title">Title</label>
       <input
         type="text"
@@ -106,6 +122,7 @@ export default function EditQuote({ quote }) {
         name="quote"
         id="quote"
         className="border border-gray-300 p-1 mb-4"
+        cols={4}
         value={formData.quote}
         onChange={(e) =>
           setFormData((prev) => ({ ...prev, quote: e.target.value }))

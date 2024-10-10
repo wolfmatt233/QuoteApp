@@ -1,6 +1,6 @@
 import { reauthenticateWithCredential, updatePassword } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { auth } from "../../../credentials";
+import { auth } from "../../credentials";
 import { EmailAuthProvider } from "firebase/auth/web-extension";
 
 export default function UpdatePassword({ setUserPage }) {

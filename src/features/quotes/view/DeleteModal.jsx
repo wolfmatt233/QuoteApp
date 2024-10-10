@@ -6,17 +6,26 @@ export default function DeleteModal({
   setDeleteModal,
   quote,
   userDoc,
-  setCurPage
+  setCurPage,
+  curPage,
 }) {
   const deleteQuote = async () => {
     try {
       let newQuotes = userDoc.quotes.filter((quote) => quote.id != deleteModal);
+
       await updateDoc(doc(db, "QuotesDB", userDoc.uid), {
         quotes: newQuotes,
       });
-      setCurPage(0);
+
+      // if the current page no longer exists, send user to the last possible page
+      let maxPages = Math.ceil(newQuotes.length / 10) - 1;
+
+      if (curPage > maxPages) {
+        setCurPage(maxPages);
+      }
     } catch (error) {
       setDeleteModal(null);
+      console.log(error);
       alert("Error deleting quote.");
     }
   };

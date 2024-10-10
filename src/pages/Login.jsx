@@ -1,7 +1,7 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useContext, useState } from "react";
 import { auth } from "../credentials";
-import ForgotPassword from "./components/user/ForgotPassword";
+import ForgotPassword from "../features/user/ForgotPassword";
 import { PageContext } from "../App";
 
 export default function Login() {

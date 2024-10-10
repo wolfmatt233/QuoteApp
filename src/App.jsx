@@ -1,17 +1,17 @@
 import { useEffect, useState, useContext, createContext } from "react";
 import "./App.css";
 import Home from "./pages/Home";
-import Navbar from "./pages/components/navigation/NavBar";
-import Menu from "./pages/components/navigation/Menu";
+import Navbar from "./layouts/NavBar";
+import Menu from "./layouts/Menu";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import useMenuToggle from "./pages/functions/useMenuToggle";
-import { signOut } from "firebase/auth";
-import { auth } from "./credentials";
-import User from "./pages/User";
-import Context from "./context/ContextProvider";
+import useMenuToggle from "./functions/useMenuToggle";
 import AddQuote from "./pages/AddQuote";
 import ViewQuotes from "./pages/ViewQuotes";
+import User from "./pages/User";
+import Context from "./context/ContextProvider";
+import { signOut } from "firebase/auth";
+import { auth } from "./credentials";
 
 export const PageContext = createContext();
 
@@ -25,7 +25,7 @@ function App() {
     signup: { component: <SignUp />, title: "SignUp" },
     user: { component: <User />, title: "Your Account" },
     add: { component: <AddQuote />, title: "Add a Quote" },
-    view: { component: <ViewQuotes />, title: "Quotes" },
+    view: { component: <ViewQuotes page={0} />, title: "Quotes" },
   };
 
   const { menuToggle, closeMenu, burgerToggle, handleBurger } = useMenuToggle();
