@@ -1,6 +1,6 @@
 export default function Pagination({ curPage, setCurPage, maxPages }) {
   return (
-    <div className="flex mb-2 justify-between">
+    <div className="flex justify-between">
       {curPage !== 0 ? (
         <button onClick={() => setCurPage((prev) => prev - 1)} className="w-8 h-8">
           <i className="fa-solid fa-arrow-left"></i>

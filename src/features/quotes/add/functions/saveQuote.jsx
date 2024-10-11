@@ -1,14 +1,6 @@
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../../../credentials";
-
-const checkImageUrl = (url) => {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.src = url;
-    img.onload = () => resolve(true);
-    img.onerror = () => resolve(false);
-  });
-};
+import { checkImageUrl } from "../../../../functions/checkImageUrl";
 
 export const saveQuote = async (
   formData,

@@ -6,11 +6,15 @@ export default function SearchList({ query, results, setResults, selectBook }) {
   const [showDropdown, setShowDropdown] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  //close dropdown when query changes
   useEffect(() => {
     setShowDropdown(false);
   }, [query]);
 
-  const search = async () => {
+  //search books api using the query and populate the dropdown list
+  const search = async (e) => {
+    e.preventDefault();
+
     if (query.length > 1) {
       setLoading(true);
 
@@ -44,6 +48,7 @@ export default function SearchList({ query, results, setResults, selectBook }) {
         </div>
       ) : (
         <button
+          type="submit"
           onClick={search}
           className="mb-2 border border-gray-200 hover:bg-gray-200 rounded-md p-1 text-gray-500"
         >
@@ -57,7 +62,7 @@ export default function SearchList({ query, results, setResults, selectBook }) {
             <button
               key={idx}
               className="hover:bg-gray-100 flex items-center"
-              onClick={() => selectBook(item)}
+              onClick={(e) => selectBook(e, item)}
             >
               <img
                 src={
@@ -74,7 +79,7 @@ export default function SearchList({ query, results, setResults, selectBook }) {
         showDropdown &&
         results.length == 0 && (
           <div className="mb-2 p-1 border border-gray-300 rounded-sm flex flex-col justify-center items center ">
-            <i class="fa-solid fa-face-frown-open text-gray-700 text-center text-2xl my-1"></i>
+            <i className="fa-solid fa-face-frown-open text-gray-700 text-center text-2xl my-1"></i>
             <p className="text-center text-lg text-gray-700">No books found.</p>
           </div>
         )

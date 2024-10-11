@@ -18,44 +18,11 @@ export default function Home() {
           />
         </div>
         <div className="max-sm:w-full w-3/4 m-auto mt-5">
-          <p className="indent-3">
+          <p className="text-center">
             QuoteScribe allows you to catalogue your favorite book quotes! Add a
             page number, add an image, add all the notes you want, or don't!
-            It's all up to you! Share with your friends! Easily share your
-            quotes to social media!
+            It's all up to you! Share with your friends!
           </p>
-          {user && (
-            <ul>
-              <p>Pages:</p>
-              <li className="list-disc ml-6">
-                <button
-                  className="text-blue-600 hover:underline"
-                  onClick={() => setPage(pages.user)}
-                >
-                  Account
-                </button>
-              </li>
-              <li className="list-disc ml-6">
-                <button
-                  className="text-blue-600 hover:underline"
-                  onClick={() => setPage(pages.view)}
-                >
-                  Quotes
-                </button>
-              </li>
-              <li className="list-disc ml-6">
-                <button
-                  className="text-blue-600 hover:underline"
-                  onClick={() => setPage(pages.add)}
-                >
-                  Add a Quote
-                </button>
-              </li>
-              <li className="list-disc ml-6">
-                <p>Edit Quote (via view quotes page)</p>
-              </li>
-            </ul>
-          )}
         </div>
       </div>
     </>

@@ -12,6 +12,11 @@ export default function AddFormManual({ setFormType, saveQuote }) {
     note: "",
   });
 
+  const handleSave = (e) => {
+    e.preventDefault();
+    saveQuote(true, formData, setFormData);
+  };
+
   return (
     <>
       <button
@@ -26,96 +31,98 @@ export default function AddFormManual({ setFormType, saveQuote }) {
         mode.
       </button>
 
-      <label htmlFor="title">Title</label>
-      <input
-        type="text"
-        name="title"
-        id="title"
-        className="border border-gray-300 p-1 mb-4"
-        value={formData.title}
-        onChange={(e) =>
-          setFormData((prev) => ({ ...prev, title: e.target.value }))
-        }
-      />
+      <form className="flex flex-col">
+        <label htmlFor="title">Title</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          className="border border-gray-300 p-1 mb-4"
+          value={formData.title}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, title: e.target.value }))
+          }
+        />
 
-      <label htmlFor="author">Author</label>
-      <input
-        type="text"
-        name="author"
-        id="author"
-        className="border border-gray-300 p-1 mb-4"
-        value={formData.author}
-        onChange={(e) =>
-          setFormData((prev) => ({ ...prev, author: e.target.value }))
-        }
-      />
+        <label htmlFor="author">Author</label>
+        <input
+          type="text"
+          name="author"
+          id="author"
+          className="border border-gray-300 p-1 mb-4"
+          value={formData.author}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, author: e.target.value }))
+          }
+        />
 
-      <label htmlFor="quote">Quote</label>
-      <textarea
-        name="quote"
-        id="quote"
-        className="border border-gray-300 p-1 mb-4"
-        rows={4}
-        value={formData.quote}
-        onChange={(e) =>
-          setFormData((prev) => ({ ...prev, quote: e.target.value }))
-        }
-      ></textarea>
+        <label htmlFor="quote">Quote</label>
+        <textarea
+          name="quote"
+          id="quote"
+          className="border border-gray-300 p-1 mb-4"
+          rows={4}
+          value={formData.quote}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, quote: e.target.value }))
+          }
+        ></textarea>
 
-      <label htmlFor="page">
-        Page <span className="text-gray-400 text-sm">(optional)</span>
-      </label>
-      <input
-        type="number"
-        name="page"
-        id="page"
-        className="border border-gray-300 p-1 mb-4"
-        value={formData.page}
-        onChange={(e) => {
-          const value = e.target.value;
-          const numValue = Number(value);
-          setFormData((prev) => ({
-            ...prev,
-            page: isNaN(numValue) ? 0 : numValue,
-          }));
-        }}
-      />
+        <label htmlFor="page">
+          Page <span className="text-gray-400 text-sm">(optional)</span>
+        </label>
+        <input
+          type="number"
+          name="page"
+          id="page"
+          className="border border-gray-300 p-1 mb-4"
+          value={formData.page}
+          onChange={(e) => {
+            const value = e.target.value;
+            const numValue = Number(value);
+            setFormData((prev) => ({
+              ...prev,
+              page: isNaN(numValue) ? 0 : numValue,
+            }));
+          }}
+        />
 
-      <label htmlFor="image">
-        Image <span className="text-gray-400 text-sm">(optional)</span>
-      </label>
-      <input
-        type="text"
-        name="image"
-        id="image"
-        className="border border-gray-300 p-1 mb-4"
-        placeholder="Enter an image url"
-        value={formData.image}
-        onChange={(e) =>
-          setFormData((prev) => ({ ...prev, image: e.target.value }))
-        }
-      />
+        <label htmlFor="image">
+          Image <span className="text-gray-400 text-sm">(optional)</span>
+        </label>
+        <input
+          type="text"
+          name="image"
+          id="image"
+          className="border border-gray-300 p-1 mb-4"
+          placeholder="Enter an image url"
+          value={formData.image}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, image: e.target.value }))
+          }
+        />
 
-      <label htmlFor="notes">
-        Notes <span className="text-gray-400 text-sm">(optional)</span>
-      </label>
-      <textarea
-        name="notes"
-        id="notes"
-        className="border border-gray-300 p-1 mb-4"
-        rows={4}
-        value={formData.note}
-        onChange={(e) =>
-          setFormData((prev) => ({ ...prev, note: e.target.value }))
-        }
-      ></textarea>
+        <label htmlFor="notes">
+          Notes <span className="text-gray-400 text-sm">(optional)</span>
+        </label>
+        <textarea
+          name="notes"
+          id="notes"
+          className="border border-gray-300 p-1 mb-4"
+          rows={4}
+          value={formData.note}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, note: e.target.value }))
+          }
+        ></textarea>
 
-      <button
-        onClick={() => saveQuote(true, formData, setFormData)}
-        className="bg-blue-500 hover:bg-blue-400 rounded-xl p-2 text-white"
-      >
-        Create
-      </button>
+        <button
+          onClick={handleSave}
+          className="bg-blue-500 hover:bg-blue-400 rounded-xl p-2 text-white"
+        >
+          Create
+        </button>
+      </form>
     </>
   );
 }

@@ -23,11 +23,18 @@ This is a React app that is focused on cataloging your favorite quotes from book
 
 # TO DO
 
-- Visual improvements
-- Responsiveness improvements
-- Home page refinement
-- Quote viewing pagination/searching
-- User change password email
-- Sharing options
-- OpenLibrary linking
+- More sharing options (social media)
 - User feedback modals/popups (SweetAlert)
+- Filter quotes by
+  - New/old
+  - Alphabetical: Book
+  - Alphabetical: Author
+- Random quote from user's library on home page
+
+# Possible additions
+
+- Social aspect
+  - Public and private quotes
+  - Liking quotes
+  - Favoriting quotes
+- User created tags for filtering (like folders)
