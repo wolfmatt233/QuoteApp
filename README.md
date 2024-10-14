@@ -24,7 +24,7 @@ This is a React app that is focused on cataloging your favorite quotes from book
 - Sign up
 - Log in
 
-# TO DO
+## TO DO
 
 - More sharing options (social media)
 - User feedback modals/popups (SweetAlert)
@@ -34,7 +34,7 @@ This is a React app that is focused on cataloging your favorite quotes from book
   - Alphabetical: Author
 - Random quote from user's library on home page
 
-# Possible additions
+## Possible additions
 
 - Social aspect
   - Public and private quotes
