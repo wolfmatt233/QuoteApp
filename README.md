@@ -7,15 +7,17 @@ This is a React app that is focused on cataloging your favorite quotes from book
 ## Pages
 
 - Home:
-  - A random quote from your collection (TODO)
+  - A random quote from your collection 
   - Explains how the website works
 - Add Quotes:
-  - Form to add a quote through the OpenLibrary api or manually
+  - Form to add a quote through the Google Books api or manually
 - Your Quotes:
   - Displays your quotes
+    - Pagination
+    - Search
+    - Filter
   - Update and delete quotes
-  - Sharing options: social media, copy quote, maybe screenshot option (TODO)
-  - Quotes connected to the api can view more details through a link to OpenLibrary (TODO)
+  - Sharing options: social media, copy quote
 - Account:
   - Change password, change username, delete account, change password email.
 - Sign up

@@ -91,7 +91,7 @@ function App() {
             </a>
             <a
               className="underline text-blue-500 hover:text-blue-400"
-              href="www.linkedin.com/in/matthew-wolf2"
+              href="https://www.linkedin.com/in/matthew-wolf2"
             >
               LinkedIn
             </a>
