@@ -11,6 +11,7 @@ This is a React app that is focused on cataloging your favorite quotes from book
   - Explains how the website works
 - Add Quotes:
   - Form to add a quote through the Google Books api or manually
+  - Form to add a quote through the Google Books api or manually
 - Your Quotes:
   - Displays your quotes
     - Pagination
@@ -19,7 +20,7 @@ This is a React app that is focused on cataloging your favorite quotes from book
   - Update and delete quotes
   - Sharing options: social media, copy quote
 - Account:
-  - Change password, change username, delete account, change password email.
+  - Change password, change username, delete account, forgot password email.
 - Sign up
 - Log in
 
