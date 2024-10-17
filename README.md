@@ -26,8 +26,8 @@ This is a React app that is focused on cataloging your favorite quotes from book
 
 ## TO DO
 
+- Fix pagination numbers beyond threshold 
 - More sharing options (social media)
-- User feedback modals/popups (SweetAlert)
 - Filter quotes by
   - New/old
   - Alphabetical: Book

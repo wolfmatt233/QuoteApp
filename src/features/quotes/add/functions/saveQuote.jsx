@@ -1,13 +1,32 @@
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../../../credentials";
 import { checkImageUrl } from "../../../../functions/checkImageUrl";
+import Swal from "sweetalert2";
+
+const InteractToast = (setPage, viewQuotes) =>
+  Swal.mixin({
+    toast: true,
+    position: "top-end",
+    confirmButtonColor: "rgb(96 165 250)",
+    confirmButtonText: "View",
+    preConfirm: () => {
+      return setPage(viewQuotes);
+    },
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    },
+  });
 
 export const saveQuote = async (
   formData,
   setFormData,
-  setShowMessage,
   isManual,
-  setQuery
+  setQuery,
+  setPage,
+  viewQuotes
 ) => {
   const { title, author, quote } = formData;
 
@@ -35,7 +54,6 @@ export const saveQuote = async (
       quotes: arrayUnion(newFormData),
     });
 
-    setShowMessage("");
 
     setFormData({
       id: crypto.randomUUID(),
@@ -50,7 +68,15 @@ export const saveQuote = async (
     if (isManual === false) {
       setQuery("");
     }
+
+    InteractToast(setPage, viewQuotes).fire({
+      icon: "success",
+      title: "Quote created successfully.",
+    });
   } catch (error) {
-    alert(error.message.split(" (")[0].replace("Firebase: ", ""));
+    InteractToast(setPage, viewQuotes).fire({
+      icon: "error",
+      title: "Quote creation failed.",
+    });
   }
 };

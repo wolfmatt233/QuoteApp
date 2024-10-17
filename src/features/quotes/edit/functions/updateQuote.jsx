@@ -2,12 +2,14 @@ import { doc, updateDoc } from "firebase/firestore";
 import { checkImageUrl } from "../../../../functions/checkImageUrl";
 import ViewQuotes from "../../../../pages/ViewQuotes";
 import { db } from "../../../../credentials";
+import { Toast } from "../../../../functions/toast";
 
 export const updateQuote = async (
   formData,
   setFormData,
   userDoc,
   setPage,
+  curPage,
   id
 ) => {
   const { title, author, quote } = formData;
@@ -50,13 +52,19 @@ export const updateQuote = async (
       page: "",
     });
 
-    const maxPage = Math.ceil(newQuotes.length / 10) - 1;
-
     setPage({
-      component: <ViewQuotes page={maxPage} id={id} />,
+      component: <ViewQuotes page={curPage} id={id} />,
       title: "Quotes",
     });
+
+    Toast.fire({
+      icon: "success",
+      title: "Quote updated successfully.",
+    });
   } catch (error) {
-    alert(error.message.split(" (")[0].replace("Firebase: ", ""));
+    Toast.fire({
+      icon: "error",
+      title: "Quote failed updating.",
+    });
   }
 };

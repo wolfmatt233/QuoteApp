@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { auth, db } from "../../credentials";
 import Context from "../../context/ContextProvider";
 import { doc, updateDoc } from "firebase/firestore";
+import Swal from "sweetalert2";
 
 export default function UpdateUsername({ setUserPage }) {
   const { userDoc } = useContext(Context);
@@ -12,11 +13,23 @@ export default function UpdateUsername({ setUserPage }) {
       await updateDoc(doc(db, "QuotesDB", auth.currentUser.uid), {
         username: name,
       });
+
       setUserPage("");
-      alert("Username changed successfully.");
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Username successfully changed.",
+        confirmButtonColor: "rgb(37 99 235)",
+      });
     } catch (error) {
-      alert("Error updating username.");
       setName(userDoc.username);
+      
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to change username, try again later.",
+        confirmButtonColor: "rgb(37 99 235)",
+      });
     }
   };
 

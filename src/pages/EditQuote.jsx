@@ -1,6 +1,4 @@
-import { doc, updateDoc } from "firebase/firestore";
 import { useContext, useState } from "react";
-import { auth, db } from "../credentials";
 import Context from "../context/ContextProvider";
 import { PageContext } from "../App";
 import ViewQuotes from "./ViewQuotes";
@@ -21,7 +19,7 @@ export default function EditQuote({ quote, curPage, id }) {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    updateQuote(formData, setFormData, userDoc, setPage, id);
+    updateQuote(formData, setFormData, userDoc, setPage, curPage, id);
   };
 
   return (

@@ -1,11 +1,4 @@
-import { useContext } from "react";
-import Context from "../context/ContextProvider";
-import { PageContext } from "../App";
-
 export default function Home() {
-  const { user } = useContext(Context);
-  const { setPage, pages } = useContext(PageContext);
-
   return (
     <>
       <div>
