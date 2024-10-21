@@ -11,12 +11,11 @@ This is a React app that is focused on cataloging your favorite quotes from book
   - Explains how the website works
 - Add Quotes:
   - Form to add a quote through the Google Books api or manually
-  - Form to add a quote through the Google Books api or manually
 - Your Quotes:
   - Displays your quotes
     - Pagination
     - Search
-    - Filter
+    - Sort
   - Update and delete quotes
   - Sharing options: social media, copy quote
 - Account:
@@ -26,12 +25,7 @@ This is a React app that is focused on cataloging your favorite quotes from book
 
 ## TO DO
 
-- Fix pagination numbers beyond threshold 
 - More sharing options (social media)
-- Filter quotes by
-  - New/old
-  - Alphabetical: Book
-  - Alphabetical: Author
 - Random quote from user's library on home page
 
 ## Possible additions
@@ -40,4 +34,5 @@ This is a React app that is focused on cataloging your favorite quotes from book
   - Public and private quotes
   - Liking quotes
   - Favoriting quotes
+  - Spoiler tags to block text unless clicked
 - User created tags for filtering (like folders)
