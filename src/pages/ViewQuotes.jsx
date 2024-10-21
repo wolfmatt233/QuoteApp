@@ -3,7 +3,7 @@ import Pagination from "../features/quotes/view/Pagination";
 import QuoteCard from "../features/quotes/view/QuoteCard";
 import Context from "../context/ContextProvider";
 import { PageContext } from "../App";
-import Search from "../features/quotes/view/Search";
+import SearchSort from "../features/quotes/view/SearchSort";
 import { scrollPosition } from "../features/quotes/view/functions/scrollPosition";
 
 export default function ViewQuotes({ page, id }) {
@@ -70,10 +70,11 @@ export default function ViewQuotes({ page, id }) {
         </div>
       ) : (
         <>
-          <Search
+          <SearchSort
             setQuotes={setQuotes}
             setCurPage={setCurPage}
             userDoc={userDoc}
+            quotes={quotes}
           />
 
           <Pagination

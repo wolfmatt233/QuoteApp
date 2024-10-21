@@ -1,6 +1,6 @@
 import { useState } from "react";
-import DeleteModal from "./DeleteModal";
-import ToggleImage from "./ToggleImage";
+import DeleteModal from "./sub-components/DeleteModal";
+import ToggleImage from "./sub-components/ToggleImage";
 
 export default function QuoteCard({ id, quote, setCurPage, curPage }) {
   const [note, setNote] = useState(null);

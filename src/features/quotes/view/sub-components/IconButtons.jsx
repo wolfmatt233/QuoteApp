@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { PageContext } from "../../../App";
-import EditQuote from "../../../pages/EditQuote";
+import { PageContext } from "../../../../App";
+import EditQuote from "../../../../pages/EditQuote";
 
 export default function IconButtons({ quote, curPage, id, setModal }) {
   const { setPage } = useContext(PageContext);

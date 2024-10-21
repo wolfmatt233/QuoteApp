@@ -22,15 +22,13 @@ export default function BookImage({ image }) {
   };
 
   return (
-    <>
-      <img
-        src={imageSrc}
-        alt="image"
-        loading="lazy"
-        className="w-28 h-44 text-center"
-        onLoad={handleImageLoad}
-        onError={handleImageError}
-      />
-    </>
+    <img
+      src={imageSrc}
+      alt="image"
+      loading="lazy"
+      className="w-28 h-44 text-center"
+      onLoad={handleImageLoad}
+      onError={handleImageError}
+    />
   );
 }

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../credentials";
-import Context from "../../../context/ContextProvider";
+import { db } from "../../../../credentials";
+import Context from "../../../../context/ContextProvider";
 
 export default function DeleteModal({ id, setModal, setCurPage, curPage }) {
   const { userDoc } = useContext(Context);
