@@ -26,4 +26,12 @@
   .menu-button {
     @apply text-xl h-12 border-b flex items-center justify-center hover:bg-blue-400 hover:text-white;
   }
+
+  .page-button {
+    @apply border hover:bg-blue-400 hover:text-white w-8 h-8 flex items-center justify-center mr-2;
+  }
+
+  .current-page {
+    @apply bg-blue-500 text-white border-none;
+  }
 }

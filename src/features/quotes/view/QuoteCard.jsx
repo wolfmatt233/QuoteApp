@@ -19,7 +19,7 @@ export default function QuoteCard({ id, quote, setCurPage, curPage }) {
     <div
       key={quote.id}
       id={id}
-      className={`border border-gray-300 p-3 mb-4 flex relative ${
+      className={`border border-gray-300 p-3 mb-4 flex relative max-sm:border-x-white max-sm:border-b-white max-sm:mb-0 ${
         id == 0 && "mt-4"
       }`}
     >

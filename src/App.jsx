@@ -75,7 +75,7 @@ function App() {
         />
 
         <div className="mx-auto px-11 py-10 max-w-screen-xl max-sm:px-0">
-          <div className="min-h-[calc(100vh-231px)] rounded-lg bg-white border-gray-300 border-[1px] p-5 max-sm:px-2 max-sm:rounded-none">
+          <div className="min-h-[calc(100vh-231px)] rounded-lg bg-white border-gray-300 border-[1px] p-5 max-sm:px-0 max-sm:rounded-none">
             {page.component}
           </div>
         </div>

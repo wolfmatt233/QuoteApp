@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { liveKey } from "../../../credentials";
 import { fetchApi } from "./functions/fetchApi";
 
 export default function SearchList({ query, results, setResults, selectBook }) {
@@ -20,7 +19,7 @@ export default function SearchList({ query, results, setResults, selectBook }) {
 
       const fetchData = async () => {
         try {
-          const resultsData = await fetchApi(query, liveKey);
+          const resultsData = await fetchApi(query);
           setResults(resultsData);
           setShowDropdown(true);
           setLoading(false);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function SearchSort({ setQuotes, setCurPage, userDoc, quotes }) {
   const [originalQuotes] = useState([...userDoc.quotes]);
@@ -79,7 +79,7 @@ export default function SearchSort({ setQuotes, setCurPage, userDoc, quotes }) {
 
   return (
     <>
-      <form className="flex mb-4">
+      <form className="flex mb-4 max-sm:mx-1">
         <input
           type="text"
           name="q"
@@ -95,7 +95,7 @@ export default function SearchSort({ setQuotes, setCurPage, userDoc, quotes }) {
         </button>
       </form>
 
-      <select className="p-2 mb-3" value={sortOption} onChange={handleSort}>
+      <select className="p-2 mb-4 max-sm:mx-1 bg-white border text-gray-600 border-gray-300" value={sortOption} onChange={handleSort}>
         <option value="default" disabled>
           Sort Options
         </option>
