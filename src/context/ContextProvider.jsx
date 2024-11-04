@@ -11,20 +11,6 @@ export function ContextProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // const fetchUserData = async () => {
-    //   onAuthStateChanged(auth, async (user) => {
-    //     if (user) {
-    //       setUser(user);
-    //       setUserDoc(await getUserDoc());
-    //     } else {
-    //       setUser(null);
-    //       setUserDoc(null);
-    //     }
-    //     setLoading(false);
-    //   });
-    // };
-    // fetchUserData();
-
     let unsubscribe;
 
     const fetchUserData = async () => {
