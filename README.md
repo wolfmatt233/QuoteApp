@@ -1,8 +1,12 @@
 # Quotes App
 
+Author: [Matthew Wolf](https://www.linkedin.com/in/matthew-wolf2)
+
 [Try It Here](https://wolfmatt233.github.io/QuoteApp/)
 
 [YouTube Demo](https://youtu.be/jqZ0X6PrfHk)
+
+## Description
 
 This is a React app that is focused on cataloging your favorite quotes from books. There will be account creation and storage using Firebase and an API will be used to fetch book details. Alternatively, users can add quotes manually, without need of the api.
 
