@@ -9,7 +9,8 @@ export default function AddQuote() {
   const { setPage } = useContext(PageContext);
   const { userDoc } = useContext(Context);
   const [formType, setFormType] = useState("");
-  const maxPages = Math.ceil(userDoc.quotes.length / 10);
+  const pages = Math.ceil(userDoc.quotes.length / 10);
+  const maxPages = userDoc.quotes.length % 10 !== 0 ? pages - 1 : pages;
   const viewQuotes = {
     component: <ViewQuotes page={maxPages} id={"last"} />,
     title: "Quotes",
