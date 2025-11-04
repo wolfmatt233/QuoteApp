@@ -19,8 +19,7 @@ export default function SearchSort({ setQuotes, setCurPage, userDoc, quotes }) {
         quote.title.toLowerCase().includes(query) ||
         quote.author.toLowerCase().includes(query) ||
         quote.quote.toLowerCase().includes(query) ||
-        quote.note.toLowerCase().includes(query) ||
-        quote.page.toLowerCase().includes(query)
+        quote.note.toLowerCase().includes(query) 
       );
     });
 
