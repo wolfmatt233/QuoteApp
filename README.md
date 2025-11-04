@@ -23,7 +23,7 @@ This is a React app that is focused on cataloging your favorite quotes from book
     - Search
     - Sort
   - Update and delete quotes
-  - Sharing options: social media, copy quote
+  - Sharing options: copy quote
 - Account:
   - Change password, change username, delete account, forgot password email.
 - Sign up
